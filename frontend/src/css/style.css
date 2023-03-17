@@ -1,0 +1,237 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --recent-blog-title-width: 0%;
+    --recent-blog-title-left: 50%;
+}
+
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body{
+    background-color: #F6F6F6;
+    font-family: "Kanit", sans-serif;
+    width: 100vw;
+    overflow-x: hidden;
+}
+#placeholderSection{
+    min-height: 90vh;
+}
+
+#pageID{
+    display: none;
+}
+
+#mainLandingPage{
+    height: 85vh;
+    padding-top: 4vw;
+    width: 100vw;
+    background-image: url("./img/mainbg.jpg");
+    background-size: cover;
+    background-position: bottom;
+    display: flex;
+    align-items: center;;
+    justify-content: center;
+}
+#mainLandingPage img{
+    width: 70vw;
+}
+
+/* SECOND SECTION */
+#mainHeader{
+    display: inline-block;
+    width: 20vw;
+}
+#mainHeader h2{
+    text-align: left;
+    font-size: 5vw;
+    font-weight: 300;
+}
+#mainHeader h3{
+    text-align: right;
+    font-size: 3vw;
+    font-family: "La Belle Aurore", cursive;
+    position: relative;
+    top: -2vw;
+}
+#mainDescription{
+    text-align: center;
+    display: inline-block;
+    font-size: 1vw;
+    width: 50%;
+    position: relative;
+    top: -2vw;
+    font-weight: 300;
+}
+
+#mainSectionTwo{
+    background-color: #CFDDC4;
+    padding: 2vw 0 10vw 0;
+    position: relative;
+}
+.glide__slide a{
+    display: inline-block;
+    height: 25vw;
+    background-color: gray;
+    width: 20vw;
+    position: relative;
+    background-image: url("./img/farmbg.png");
+    background-size: cover;
+    overflow: show;
+    margin-top: 4vw;
+}
+.glide__slide a div{
+    color: black;
+    display: inline-block;
+    position: absolute;
+    width: 90%;
+    font-size: 2vw;
+    text-align: center;
+    padding: 0.5vw 0;
+    background-color: #F6F6F6;
+    font-family: "Kelly Slab", serif;
+    top: -1vw;
+    left: 5%;
+}
+
+#mainSectionThree{
+    display: inline-block;
+    width: 85%;
+    margin-left: 7.5%;
+    position: relative;
+    top: -5vw;
+    background-color: #FCFCFC;
+    min-height: 20vw;
+}
+
+#recentPostsTitle{
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    font-size: 4vw;
+    font-family: "Lustria", sans-serif;
+    background-color:#FCFCFC;
+    z-index: 10;
+}
+.center:has(#recentPostsTitle){
+    position: relative;
+}
+.center:has(#recentPostsTitle)::after{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: var(--recent-blog-title-width);
+    height: 3px;
+    left: var(--recent-blog-title-left);
+    top: calc(50% - 1.5px);
+    background-color: black;
+    z-index: 5;
+}
+
+/* BLOG RESULT STYLES */
+.blog-result{
+    display: flex;
+    justify-content: space-between;
+    height: 22vw;
+    width: 100%;
+    margin: 4vw 0;
+    text-decoration: none;
+    color: black;
+    position: relative;
+    z-index: 10;
+}
+.blog-result img{
+    width: 40%;
+    height: 100%;
+    margin-left: 5%;
+    margin-right: 0;
+}
+.blog-result .content{
+    width: 50%;
+    padding: 0 1vw;
+}
+.blog-result-hover{
+    display: inline-block;
+    position: absolute;
+    top:0;
+    right:0;
+    height:100%;
+    width: 0;
+    background-color: #BBC8B1;
+    z-index: -1;
+}
+.blog-result.even .blog-result-hover{
+    left:0;
+}
+.blog-result .content .title{
+    text-align: left;
+    margin-left: -4%;
+    position: relative;
+    width: 100%;
+    font-family: "Lustria", serif;
+    font-size: 3.5vw;
+    padding-bottom: 1vw;
+}
+.blog-result .content .description{
+    text-align: left;
+    width: 95%;
+    margin-left: 5%;
+    font-family: "Kanit", sans-serif;
+    font-size: 1.2vw;
+    font-weight: 300;
+}
+.blog-result.even img{
+    margin-right: 5%;
+    margin-left: 0;
+}
+.blog-result.even .content{
+    width: 50%;
+    padding: 0 0 0 3%;
+}
+
+footer{
+    font-family: "Lustria", serif;
+    background-color: #CFDDC4;
+    width:100%;
+    min-height: 10vw;
+}
+
+footer .title{
+    font-size: 1.5vw;
+    padding: 2vw;
+}
+footer .credits{
+    padding: 1vw 0;
+    font-size: 1vw;
+    text-align: center;
+    background-color: #BBC8B1;
+}
+.center:has(.social-icon){
+    position: relative;
+    top: -2vw;
+}
+.social-icon{
+    display: inline-block;
+    width: 5vw;
+    aspect-ratio: 1/1;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.social-icon.youtube{
+    background-image: url('./img/youtube_icon.svg');
+    background-size: 80%;
+    background-position: center;
+}
+.social-icon.facebook{
+    background-image: url('./img/facebook_icon.svg');
+}
+.social-icon.instagram{
+    background-image: url('./img/instagram_icon.svg');
+}

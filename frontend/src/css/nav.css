@@ -1,0 +1,58 @@
+#mainNav{
+    position: relative;
+    width: 100%;
+    height: 4vw;
+}
+
+#mainNav.primary{
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+#mainNavLogo{
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    width: 40%;
+    left: 30%;
+    top:30%;
+    font-family: "La Belle Aurore", cursive;
+    font-size: 3.5vw;
+}
+#mainNav ul{
+    list-style-type: none;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    margin-left: 2vw;
+}
+#mainNav ul li{
+ margin: 1vw;   
+}
+
+#mainNav ul li a{
+    color: black;
+    font-family: "Kelly Slab", serif;
+    text-decoration: none;
+    font-size: 1.2vw;
+    position: relative;
+    transition: 0.2s color;
+}
+#mainNav ul li a:hover{
+    color: rgb(146, 146, 146);
+}
+#mainNav ul li a.active::after{
+    content: "";
+    display: inline-block;
+    height: 1px;
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    left:0;
+    bottom: -0.5vw;
+}

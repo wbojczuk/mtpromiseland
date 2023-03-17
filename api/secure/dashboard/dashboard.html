@@ -1,0 +1,18 @@
+<h1>DASHBOARD</h1>
+<button id="testButton">TEST POST</button>
+<script>
+    document.getElementById("testButton").onclick = ()=>{
+        fetch("http://localhost:3000/api/blogs", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+    id: "9897",
+    title: "My Blog",
+    description: "Just a Description",
+    content: "TEst Content"
+  })
+        })
+    }
+</script>
