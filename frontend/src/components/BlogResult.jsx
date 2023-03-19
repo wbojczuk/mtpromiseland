@@ -25,6 +25,18 @@ export default function BlogResult(props){
                 <div className="blog-result-hover"></div>
             </Link>
         )
+    }else if(props.resultPage){
+        return(
+            <Link to="/blog" className="blog-result-page"  onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            <img src={(props.img) ? props.img : "./img/placeholder.jpg"} alt="Post Image" />
+            <div className="content">
+                <div className="title">{(props.title) ? props.title : "Temp Title"}</div>
+                <div className="description">{(props.description) ? props.description : ">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."}</div>
+                <div className="blog-result-hover"></div>
+            </div>
+        </Link>
+        )
+   
     }else{
         return(
             <Link to="/blog" className="blog-result"  onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

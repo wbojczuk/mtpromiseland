@@ -1,0 +1,118 @@
+#blogSearchTitle{
+    text-align: center;
+    font-family: "Kelly Slab", serif;
+    font-size: 2.5vw;
+}
+
+#blogResultSection{
+    display: inline-block;
+    width: 70%;
+    position: relative;
+    left: 15%;
+    margin-top: 2%;
+    background-color: #FCFCFC;
+}
+
+#blogResultNav{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 3vw;
+    width: 80%;
+    left: 10%;
+}
+#blogResultNav::after{
+    content:"";
+    display: inline-block;
+    position: absolute;
+    width: 80%;
+    height: 1px;
+    top:0;
+    left:10%;
+    background-color: #4f5849;
+}
+#blogResultNav .item{
+    width: 7vw;
+    font-size: 1.2vw;
+    border: 1px solid rgba(0, 0, 0, 0.574);
+    border-radius: 20px;
+    background-color: #b3c1a9;
+    text-align: center;
+    font-family: "Kanit", sans-serif;
+    font-weight: 200;
+    user-select: none;
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    margin: 0 0.5vw;
+}
+
+div:has(#blogResultSection){
+    padding: 5vw 0 0 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #e7f6dc;
+}
+
+/* BLOG RESULT STYLES */
+.blog-result-page{
+    display: flex;
+    justify-content: space-between;
+    height: 15vw;
+    width: 100%;
+    padding: 0.5vw 0;
+    margin: 2vw 0;
+    text-decoration: none;
+    color: black;
+    position: relative;
+    z-index: 10;
+}
+.blog-result-page img{
+    width: 40%;
+    height: 100%;
+    margin-left: 5%;
+    margin-right: 0;
+}
+.blog-result-page .content{
+    width: 50%;
+    padding: 0 1vw;
+}
+.blog-result-hover{
+    display: inline-block;
+    position: absolute;
+    top:0;
+    right:0;
+    height:100%;
+    width: 0;
+    background-color: #BBC8B1;
+    z-index: -1;
+}
+.blog-result-page.even .blog-result-hover{
+    left:0;
+}
+.blog-result-page .content .title{
+    text-align: left;
+    margin-left: -4%;
+    position: relative;
+    width: 100%;
+    font-family: "Lustria", serif;
+    font-size: 3vw;
+    padding-bottom: 0;
+}
+.blog-result-page .content .description{
+    text-align: left;
+    width: 95%;
+    margin-left: 0%;
+    font-family: "Kanit", sans-serif;
+    font-size: 1vw;
+    font-weight: 300;
+}
+.blog-result-page.even img{
+    margin-right: 5%;
+    margin-left: 0;
+}
+.blog-result-page.even .content{
+    width: 50%;
+    padding: 0 0 0 3%;
+}

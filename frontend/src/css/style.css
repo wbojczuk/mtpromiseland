@@ -52,13 +52,16 @@ body{
     text-align: left;
     font-size: 5vw;
     font-weight: 300;
+    transform: translateX(20px);
+    clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+
 }
-#mainHeader h3{
-    text-align: right;
-    font-size: 3vw;
-    font-family: "La Belle Aurore", cursive;
+#imcarly{
+    width: 15vw;
+    height: 5vw;
     position: relative;
-    top: -2vw;
+    top: -1.8vw;
+    left: 6vw;
 }
 #mainDescription{
     text-align: center;
@@ -85,12 +88,15 @@ body{
     background-size: cover;
     overflow: show;
     margin-top: 4vw;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.523);
+    /* transform-origin: right;
+    transform: rotateZ(2deg); */
 }
 .glide__slide a div{
     color: black;
     display: inline-block;
     position: absolute;
-    width: 90%;
+    width: 18vw;
     font-size: 2vw;
     text-align: center;
     padding: 0.5vw 0;
@@ -98,6 +104,10 @@ body{
     font-family: "Kelly Slab", serif;
     top: -1vw;
     left: 5%;
+}
+#carouselContainer{
+    width: 100vw;
+    position: relative;
 }
 
 #mainSectionThree{
