@@ -1,3 +1,5 @@
+// IMPLEMENT IMAGES LOADED
+
 import React from "react";
 import Nav from "../components/Nav";
 import Glide from "@glidejs/glide";
@@ -25,9 +27,10 @@ function mainPhotoAnims(evt){
 React.useEffect(()=>{
 
     new Glide('.glide', {
-        type: "carousel",
-        focusAt: "center",
-        perView: 4
+        type: "slider",
+        focusAt: 0,
+        perView: 4,
+        startAt: 0
     }).mount();
 
     getRecentBlogs();
@@ -97,8 +100,10 @@ React.useEffect(()=>{
             <div className="glide">
             <div data-glide-el="track" className="glide__track">
                 <ul className="glide__slides">
+                <li className="glide__slide"><Link to={`blog?tag=all`}><div>All Blogs</div></Link></li>
                 <li className="glide__slide"><Link to={`blog?tag=farm`}><div>Farm</div></Link></li>
                 <li className="glide__slide"><Link to={`blog?tag=projects`}><div>Projects</div></Link></li>
+                <li className="glide__slide"><Link to={`blog?tag=family`}><div>Family</div></Link></li>
                 <li className="glide__slide"><Link to={`blog?tag=recipes`}><div>Recipes</div></Link></li>
                 </ul>
             </div>
