@@ -41,6 +41,7 @@ body{
 }
 #mainLandingPage img{
     width: 70vw;
+    clip-path: polygon(0 0, 100% 1%, 100% 0, 0 0);
 }
 
 /* SECOND SECTION */

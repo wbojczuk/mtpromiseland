@@ -6,20 +6,6 @@ const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-
-
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
-  }));
-  app.use(passport.authenticate('session'));
-
-  app.use("/login", require("./auth/login.js"));
-  app.use("/dashboard", require("./secure/dashboard.js"))
-
 const whitelist = ["http://localhost", "http://localhost:5173", "http://localhost:3000"];
 const corsOptions = {
     origin: (origin, callback)=>{
@@ -33,6 +19,20 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
+
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+  }));
+  
+app.use(passport.authenticate('session'));
+
+app.use("/login", require("./auth/login.js"));
+app.use("/dashboard", require("./secure/dashboard.js"))
 app.use("/api", require("./api/api.js"));
 
 // SERVING THE STATIC FRONTEND

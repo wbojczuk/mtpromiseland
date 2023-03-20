@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import BlogResult from "../components/BlogResult";
 import "../css/blogresults.css";
 export default function Blog(){
+
+    const [currentBlogs, setCurrentBlogs] = React.useState(null);
     
  const [blogResults, setBlogResults] = React.useState([]);
         const blogResultComponents = blogResults.map((blogResult)=>{
@@ -14,6 +16,10 @@ export default function Blog(){
 
         const [reloadTrigger, setReloadTrigger] = React.useState(null);
 
+        function triggerReload(){
+            setReloadTrigger(jsdev.getUUID());
+        }
+
         const [blogCategories, setBlogCategories] = React.useState(["test"]);
         const blogCategoryComponents = blogCategories.map((blogCategory)=>{
             return(
@@ -21,12 +27,11 @@ export default function Blog(){
             )
         });
 
-        function triggerReload(){
-            setReloadTrigger(jsdev.getUUID());
-        }
-
     React.useEffect(()=>{
         window.scrollTo(0, 0);
+
+
+        
 
         function getBlogCategories(blogs){
             const categories = ["all"];
@@ -51,21 +56,32 @@ export default function Blog(){
         }
     
         async function getBlogResults(tag = null){
-                try{
-                    const blogData = await fetch(`${NODESERVER}/api/blogs`);
-                    const blogJSON = await blogData.json();
-    
-                    setBlogCategories(getBlogCategories(blogJSON))
+                if(currentBlogs == null){
+                    try{
+                        const blogData = await fetch(`${NODESERVER}/api/blogs`, {headers: {'Cache-Control': 'no-cache'}});
+                        const blogJSON = await blogData.json();
+        
+                        setBlogCategories(getBlogCategories(blogJSON));
+                        if(tag !== null && tag !== "all"){
+                            // ADD TAG ALL SUPPORT
+                            setBlogResults(getBlogsOfCategory(blogJSON, tag));
+                        }else{
+                        setBlogResults(blogJSON);
+                        }
+                        setCurrentBlogs(blogJSON);
+        
+                    } catch(err){
+                        console.log(err);
+                    }
+                }else{
                     if(tag !== null && tag !== "all"){
                         // ADD TAG ALL SUPPORT
-                        setBlogResults(getBlogsOfCategory(blogJSON, tag));
+                        setBlogResults(getBlogsOfCategory(currentBlogs, tag));
                     }else{
-                    setBlogResults(blogJSON);
+                    setBlogResults(currentBlogs);
                     }
-    
-                } catch(err){
-                    console.log(err);
                 }
+               
         }
 
         const urlData = jsdev.GETValues()

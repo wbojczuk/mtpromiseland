@@ -46,4 +46,23 @@ router.route("/blogs")
     
 })
 
+// GET LATEST 4 BLOGS
+router.get("/blogs/latest", (req,res)=>{
+    const blogsLength = data.blogs.length;
+    if(blogsLength > 4){
+        const retval = [];
+        for(let i = blogsLength - 4; i < blogsLength; ++i){
+            retval.push(data.blogs[i]);
+        }
+        res.json(retval);
+    }else{
+        res.json(data.blogs);
+    }
+})
+
+// GET BLOGS BY TAG
+router.get("/blogs/category/:tag", (req,res)=>{
+    req.params.tag
+})
+
 module.exports = router;

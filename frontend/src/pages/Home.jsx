@@ -6,42 +6,36 @@ import BlogResult from "../components/BlogResult";
 import gsap from "gsap";
 import Vivus from "vivus";
 export default function Home(){
-    
-    
-    const [blogs, setBlogs] = React.useState([]);
-    const blogComponents = blogs.map((blog)=>{
-        return(
-            <BlogResult key={blog.id} {...blog} />
-        )
-    })
 
-    React.useEffect(()=>{
+const [blogs, setBlogs] = React.useState([]);
+const blogComponents = blogs.map((blog)=>{
+    return(
+        <BlogResult key={blog.id} {...blog} />
+    )
+})
+
+function mainPhotoAnims(evt){
+    gsap.to(evt.currentTarget, {
+        "clip-path": "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        duration: 1,
+        ease: "bounce.out"
+    });
+}
+
+React.useEffect(()=>{
+
     new Glide('.glide', {
-            type: "carousel",
-            focusAt: "center",
-            perView: 4
-        }).mount();
-    }, [])
-
-    React.useEffect(()=>{
+        type: "carousel",
+        focusAt: "center",
+        perView: 4
+    }).mount();
 
     getRecentBlogs();
     async function getRecentBlogs(){
         try{
-       const blogData = await fetch(`${NODESERVER}/api/blogs`);
-       const blogJSON = await blogData.json();
-       let blogLength = blogJSON.length;
-       let startPoint = 0;
-       if(blogLength > 4){startPoint = blogLength - 4;}
-       let recentBlogs = [];
-        for(let i = startPoint; i < blogLength; ++i){
-            if(i == 0 || i % 2 == 0){
-                recentBlogs.push({...blogJSON[i], even: true});
-            }else{
-                recentBlogs.push(blogJSON[i]);
-            }
-        }
-     setBlogs(recentBlogs);
+            const blogData = await fetch(`${NODESERVER}/api/blogs/latest`, {headers: {'Cache-Control': 'no-cache'}});
+            const recentBlogs = await blogData.json();
+            setBlogs(recentBlogs);
        } catch(err){
             console.log(err)
         }
@@ -71,12 +65,9 @@ export default function Home(){
             ease: "power3.inOut",
             duration: 0.8,
             onComplete: ()=>{new Vivus("imcarly", {type: "oneByOne", file: "./img/imcarly.svg"})}
-        })
-        
-    }})
+        })    
+    }});
 
-    
-    
 },[]);
 
 
@@ -86,7 +77,7 @@ export default function Home(){
         <div id="pageID" data-id="home"></div>
         
         <section id="mainLandingPage">
-            <img src="./img/mainpic.png" alt="Picture of the Family" />
+            <img onLoad={mainPhotoAnims} src="./img/mainpic.png" alt="Picture of the Family" />
         </section>
 
         <section id="mainSectionOne">
@@ -124,7 +115,7 @@ export default function Home(){
                 <h1 id="recentPostsTitle">Recent Posts</h1>
             </div>
         <div id="recentPosts">
-        {blogComponents}
+            {blogComponents}
         </div>
         </section>
         </>
