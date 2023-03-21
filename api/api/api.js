@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const data = {};
 const fs = require("fs");
-data.blogs = require("./blogs.json");
+const path = require("path");
+const fspromise = require("fs/promises")
+data.blogs = require("./blogdata.json");
 
 function idExists(id){
     let retval = false;
@@ -15,20 +17,24 @@ function idExists(id){
 }
 
 function saveBlogs(){
-    fs.writeFile("./api/blogs.json", JSON.stringify(data.blogs), (err)=>{if(err){console.log(err); res.status = 503;}})
+    fs.writeFile("./api/blogdata.json", JSON.stringify(data.blogs), (err)=>{if(err){console.log(err); res.status = 503;}})
 }
 
 router.route("/blogs")
 .get((req, res)=>{
     res.json(data.blogs);
 })
-.post((req, res)=>{
+.post(async (req, res)=>{
     if(req.user){
         const sentData = req.body;
         // Validate Properties Are there
-        if(sentData.title && sentData.id && sentData.content && sentData.description){
+        if(sentData.title && sentData.id && sentData.content && sentData.description, sentData.tags){
             if(!idExists(sentData.id)){
-                const newBlog = {id: sentData.id, title: sentData.title, description: sentData.description, content: sentData.content};
+
+                // GET CURRENT BLOG ID
+                await fspromise.writeFile(path.join(__dirname,`blogs/${sentData.id}.txt`), sentData.content, (err)=>{if(err){console.log(err); res.sendStatus(503)}});
+
+                const newBlog = {id: sentData.id, title: sentData.title, description: sentData.description, content: `${sentData.id}.txt`, tags: sentData.tags};
                 data.blogs.push(newBlog);
                 saveBlogs();
                 res.status = 200;

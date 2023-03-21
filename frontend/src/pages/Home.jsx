@@ -10,9 +10,10 @@ import Vivus from "vivus";
 export default function Home(){
 
 const [blogs, setBlogs] = React.useState([]);
-const blogComponents = blogs.map((blog)=>{
+const blogComponents = blogs.map((blog, index)=>{
+    const isEven = (index == 0 || index % 2 == 0);
     return(
-        <BlogResult key={blog.id} {...blog} />
+        <BlogResult even={isEven} key={blog.id} {...blog} />
     )
 })
 
@@ -28,6 +29,7 @@ React.useEffect(()=>{
 
     new Glide('.glide', {
         type: "slider",
+        bound: true,
         focusAt: 0,
         perView: 4,
         startAt: 0
@@ -79,7 +81,7 @@ React.useEffect(()=>{
         <Nav />
         <div id="pageID" data-id="home"></div>
         
-        <section id="mainLandingPage">
+        <section id="mainLandingPage" className="center">
             <img onLoad={mainPhotoAnims} src="./img/mainpic.png" alt="Picture of the Family" />
         </section>
 

@@ -9,7 +9,7 @@
 
 #mainNav.secondary{
     box-shadow: 0px 1px 4px rgba(0,0,0,0.4);
-    background-color: #CFDDC4;
+    background-color: var(--primary-bg-color);
 }
 
 #mainNavLogo{
@@ -23,6 +23,8 @@
     top:30%;
     font-family: "La Belle Aurore", cursive;
     font-size: 3.5vw;
+    color: black;
+    text-decoration: none;
 }
 #mainNav ul{
     list-style-type: none;

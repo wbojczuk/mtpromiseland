@@ -78,16 +78,7 @@ div:has(#blogResultSection){
     width: 50%;
     padding: 0 1vw;
 }
-.blog-result-hover{
-    display: inline-block;
-    position: absolute;
-    top:0;
-    right:0;
-    height:100%;
-    width: 0;
-    background-color: #BBC8B1;
-    z-index: -1;
-}
+
 .blog-result-page.even .blog-result-hover{
     left:0;
 }

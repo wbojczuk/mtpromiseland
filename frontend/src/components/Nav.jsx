@@ -19,7 +19,7 @@ export default function Nav(props){
                     <Link id="blogLink" to="/blog">Blog</Link>
                 </li>
             </ul>
-            <div id="mainNavLogo">Mt Promiseland Farm</div>
+            <Link to="/" id="mainNavLogo">Mt Promiseland Farm</Link>
         </nav>
     )
 }
