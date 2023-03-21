@@ -1,4 +1,5 @@
 import React from "react";
+import LoadingAnim from "../components/LoadingAnim";
 import Nav from "../components/Nav";
 import {Link} from "react-router-dom";
 import BlogResult from "../components/BlogResult";
@@ -66,8 +67,10 @@ export default function Blog(){
                             // ADD TAG ALL SUPPORT
                             setBlogResults(getBlogsOfCategory(blogJSON, tag));
                         }else{
+                            if(document.getElementById("loadingAnim")){document.getElementById("loadingAnim").style.display = "none"}
                         setBlogResults(blogJSON);
                         }
+                        if(document.getElementById("loadingAnim")){document.getElementById("loadingAnim").style.display = "none"}
                         setCurrentBlogs(blogJSON);
         
                     } catch(err){
@@ -78,6 +81,7 @@ export default function Blog(){
                         // ADD TAG ALL SUPPORT
                         setBlogResults(getBlogsOfCategory(currentBlogs, tag));
                     }else{
+                        if(document.getElementById("loadingAnim")){document.getElementById("loadingAnim").style.display = "none"}
                     setBlogResults(currentBlogs);
                     }
                 }
@@ -99,7 +103,7 @@ export default function Blog(){
         <Nav />
 
         <div id="pageID" data-id="blog"></div>
-
+        <LoadingAnim />
         <div>
             <div id="blogSearchTitle">Blog Search</div>
             <div id="blogResultNav">

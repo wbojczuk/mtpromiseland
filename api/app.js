@@ -36,8 +36,8 @@ app.use("/dashboard", require("./secure/dashboard.js"))
 app.use("/api", require("./api/api.js"));
 
 // SERVING THE STATIC FRONTEND
-app.use(express.static("public"));
-// app.get("^/$|index(.html)?", (req, res)=>{
+// app.use(express.static("public"));
+// app.get("^/$|(index|blog)", (req, res)=>{
 //     res.sendFile(path.join(__dirname, "public" , "index.html"));
 // })
 

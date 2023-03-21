@@ -14,6 +14,21 @@
     justify-content: center;
 }
 
+#loadingAnim{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 999;
+    pointer-events: none;
+}
+#loadingAnimPlayer{
+    width: 20%;
+    aspect-ratio: 1/1;
+}
+
 body{
     background-color: #F6F6F6;
     font-family: "Kanit", sans-serif;
