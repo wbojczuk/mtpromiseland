@@ -21,6 +21,8 @@ export default function Blog(){
             setReloadTrigger(jsdev.getUUID());
         }
 
+        const [currentTag, setCurrentTag] = React.useState("all");
+
         const [blogCategories, setBlogCategories] = React.useState(["test"]);
         const blogCategoryComponents = blogCategories.map((blogCategory)=>{
             return(
@@ -28,11 +30,21 @@ export default function Blog(){
             )
         });
 
-    React.useEffect(()=>{
+React.useEffect(()=>{
+    // SET ACTIVE BLOG NAV
+    const blogCategoryElems = document.querySelectorAll("#blogResultNav .item");
+    blogCategoryElems.forEach((elem)=>{
+        if(elem.textContent.toLowerCase() == currentTag){
+            elem.classList.add("active");
+        }else{
+            elem.classList.remove("active");
+        }
+    });
+},[blogCategories, currentTag])
+
+
+React.useEffect(()=>{
         window.scrollTo(0, 0);
-
-
-        
 
         function getBlogCategories(blogs){
             const categories = ["all"];
@@ -56,14 +68,14 @@ export default function Blog(){
             return retBlogs;
         }
     
-        async function getBlogResults(tag = null){
+        async function getBlogResults(tag = "all"){
                 if(currentBlogs == null){
                     try{
                         const blogData = await fetch(`${NODESERVER}/api/blogs`, {headers: {'Cache-Control': 'no-cache'}});
                         const blogJSON = await blogData.json();
         
                         setBlogCategories(getBlogCategories(blogJSON));
-                        if(tag !== null && tag !== "all"){
+                        if(tag !== "all"){
                             // ADD TAG ALL SUPPORT
                             setBlogResults(getBlogsOfCategory(blogJSON, tag));
                         }else{
@@ -77,7 +89,7 @@ export default function Blog(){
                         console.log(err);
                     }
                 }else{
-                    if(tag !== null && tag !== "all"){
+                    if(tag !== "all"){
                         // ADD TAG ALL SUPPORT
                         setBlogResults(getBlogsOfCategory(currentBlogs, tag));
                     }else{
@@ -89,10 +101,11 @@ export default function Blog(){
         }
 
         const urlData = jsdev.GETValues()
-            if(urlData.tag !== null){
+            if(urlData.tag){
                 getBlogResults(urlData.tag);
+                setCurrentTag(urlData.tag);
             }else{
-                getBlogResults();
+                getBlogResults("all");
             }
             
     },[reloadTrigger])
