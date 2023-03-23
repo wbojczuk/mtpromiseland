@@ -58,7 +58,7 @@
     height: 4px;
     width: 100%;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0,0.9);
+    background-color: rgba(0, 0, 0,0.7);
     filter: blur(2px);
 }
 
@@ -120,4 +120,82 @@ div:has(#blogResultSection){
 .blog-result-page.even .content{
     width: 50%;
     padding: 0 0 0 3%;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 650px) {
+    #blogSearchTitle{
+        font-size: 4vh;
+    }
+    #blogResultNav{
+        height: 3vh;
+        width: 90%;
+        margin-top: 2vh;
+        left: 5%;
+    }
+    #blogResultNav::after{
+        width: 100%;
+        top:-1vh;
+        left:0%;
+    }
+    #blogResultNav .item{
+        width: 8vh;
+        font-size: 1.6vh;
+        margin: 0 0.5vh;
+    }
+
+    
+    div:has(#blogResultSection){
+        padding: 5vw 0 0 0;
+        width: 100%;
+        min-height: 100vh;
+        background-color: #e7f6dc;
+    }
+    #blogResultSection{
+        width: 95%;
+        left: 2.5%;
+        margin-top: 4%;
+    }
+/* BLOG RESULT COMPONENT STYLES */
+    .blog-result-page{
+        height: auto;
+        min-height: 14vh;
+        margin: 1vh 0;
+        padding: 1vh 0;
+        position: relative;
+    }
+    .blog-result-page:not(.blog-result-page:nth-last-child(1))::before{
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 80%;
+        height: 1px;
+        background-color: var(--primary-bg-color);
+        bottom: -0.5vh;
+        left: 10%;
+    }
+    .blog-result-page .content{
+        padding: 0 0.5vh;
+        width: 70% ;
+    }
+    .blog-result-page .content .title{
+        margin-left: 2%;
+        font-size: 3vh;
+        padding-bottom: 0.1vh;
+    }
+    .blog-result-page img{
+        width: 30%;
+        height: 90%;
+        margin-top: 1%;
+        margin-right: 0;
+    }
+    .blog-result-page .content .description{
+        width: 95%;
+        margin-left: 5%;
+        font-size: 1.2vh;
+    }
+    .blog-result-page.even .content{
+        width: 60%;
+        padding: 0 0 0 0.5vh;
+    }
 }

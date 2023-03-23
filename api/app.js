@@ -6,7 +6,7 @@ const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 
-const whitelist = ["http://localhost", "http://localhost:5173", "http://localhost:3000"];
+const whitelist = ["http://localhost", "http://localhost:5173", "http://localhost:3000", "https://mtpromiseland.alwaysdata.net"];
 const corsOptions = {
     origin: (origin, callback)=>{
         if(whitelist.includes(origin) || !origin){

@@ -40,6 +40,8 @@ React.useEffect(()=>{
             elem.classList.remove("active");
         }
     });
+    // SET CURRENT BLOG STATE
+    document.getElementById("blogSearchTitle").textContent = (currentTag.toLowerCase() == "all") ? "All Blogs" : `Search: ${jsdev.wordsToUpperCase(currentTag)}`;
 },[blogCategories, currentTag])
 
 
@@ -113,12 +115,11 @@ React.useEffect(()=>{
     
     return(
         <>
-        <Nav />
 
         <div id="pageID" data-id="blog"></div>
         <LoadingAnim />
         <div>
-            <div id="blogSearchTitle">Blog Search</div>
+            <div id="blogSearchTitle">All Blogs</div>
             <div id="blogResultNav">
                 {blogCategoryComponents}
             </div>

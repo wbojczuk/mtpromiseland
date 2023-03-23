@@ -32,7 +32,12 @@ React.useEffect(()=>{
         bound: true,
         focusAt: 0,
         perView: 4,
-        startAt: 0
+        startAt: 0,
+        breakpoints: {
+            650: {
+              perView: 2
+            }
+        }
     }).mount();
 
     getRecentBlogs();
@@ -68,20 +73,22 @@ React.useEffect(()=>{
             x: 0,
             "clip-path": "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
             ease: "power3.inOut",
-            duration: 0.8,
-            onComplete: ()=>{new Vivus("imcarly", {type: "oneByOne", file: "./img/imcarly.svg"})}
+            duration: 0.8
         })    
+        new Vivus("imcarly", {type: "oneByOne", duration: 200, file: "./img/imcarly.svg"})
     }});
 
     const mainNavLogo = document.getElementById("mainNavLogo");
     const mobileMainLogo = document.getElementById("mobileMainLogo");
-    window.addEventListener("scroll", scrollHandle);
-    function scrollHandle(){
+    window.addEventListener("scroll", handleScroll);
+    function handleScroll(){
+        if(document.getElementById("pageID").dataset.id == "home" && window.matchMedia("only screen and (max-width: 650px)").matches){
         if(mobileMainLogo.getBoundingClientRect().top >= 0){
             mainNavLogo.style.display = "none";
         }else{
-            mainNavLogo.style.display = "initial";
+            mainNavLogo.style.display = "inline-flex";
         }
+    }
     }
 
 },[]);
@@ -89,7 +96,6 @@ React.useEffect(()=>{
 
     return(
         <>
-        <Nav />
         <div id="pageID" data-id="home"></div>
         
         <section id="mainLandingPage" className="center">

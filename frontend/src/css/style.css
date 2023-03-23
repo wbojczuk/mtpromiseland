@@ -276,6 +276,9 @@ footer .credits{
     background-image: url('./img/instagram_icon.svg');
 }
 @media only screen and (max-width: 650px) {
+    body{
+        padding-top: 4vh;
+    }
     #mainLandingPage{
         height: 60vh;
         padding-top: 4vw;
@@ -293,8 +296,133 @@ footer .credits{
         width: 100%;
         left:0;
         top: 10%;
-        font-size: 4vh;
+        font-size: 4.5vh;
         text-align: center;
         font-family: "La Belle Aurore", cursive;
     }
+    #mainHeader{
+        width: 50%;
+    }
+    #mainHeader h2{
+        font-size: 5.5vh;
+    }
+    #imcarly{
+        width: 30vw;
+        height: 5vh;
+        top: -1.8vh;
+        left: 8vw;
+    }
+    #mainDescription{
+        font-size: 1.5vh;
+        width: 90%;
+        padding-bottom: 2vh;
+    }
+    #mainSectionTwo{
+        padding: 2vh 0 10vh 0;
+    }
+    .glide__slide a{
+        height: 26vh;
+        width: 20vh;
+        margin-top: 4vh;
+    }
+    .glide__slide a div{
+        width: 15vh;
+        font-size: 2.2vh;
+        padding: 0.5vh 0;
+        top: -1vh;
+        left: 2.5vh;
+    }
+    .glide__arrow{
+        display: none;
+    }
+
+    #mainSectionThree{
+        width: 95%;
+        margin-left: 2.5%;
+        top: -5vh;
+        min-height: 20vh;
+    }
+    
+    #recentPostsTitle{
+        font-size: 4vh;
+    }
+    .center:has(#recentPostsTitle)::after{
+        height: 2px;
+    }
+    
+    
+    
+    /* BLOG RESULT COMPONENT STYLES */
+    .blog-result{
+        height: auto;
+        min-height: 14vh;
+        margin: 1vh 0;
+        padding: 0.5vh 0;
+        position: relative;
+    }
+    .blog-result:not(.blog-result:nth-last-child(1))::before{
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 80%;
+        height: 1px;
+        background-color: var(--primary-bg-color);
+        bottom: -0.5vh;
+        left: 10%;
+    }
+    .blog-result .content{
+        padding: 0 0.5vh;
+        width: 70% ;
+    }
+    .blog-result .content .title{
+        margin-left: 2%;
+        font-size: 3vh;
+        padding-bottom: 0.1vh;
+    }
+    .blog-result img{
+        width: 30%;
+        height: 90%;
+        margin-top: 1%;
+        margin-right: 0;
+    }
+    .blog-result .content .description{
+        width: 95%;
+        margin-left: 5%;
+        font-size: 1.2vh;
+    }
+    .blog-result.even .content{
+        width: 60%;
+        padding: 0 0 0 0.5vh;
+    }
+    
+    
+    
+    footer{
+        min-height: 10vh;
+        position: relative;
+        padding-bottom: 4vh;
+    }
+    
+    footer .title{
+        font-size: 1.5vh;
+
+    }
+    footer .credits{
+        font-size: 1vh;
+        width: 100%;
+        position: absolute;
+        bottom:0;
+        left:0;
+        padding: 2vh 0 ;
+    }
+    
+    
+    
+    .center:has(.social-icon){
+        padding-bottom: 3vh;
+    }
+    .social-icon{
+        width: 6vh;
+    }
+    
 }

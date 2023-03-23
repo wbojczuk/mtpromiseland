@@ -86,6 +86,17 @@
         font-size: 2.5vh;
         height: 100%;
         top:10%;
+        z-index: 999;
+        --navlogo-underline-width: 00%;
+    }
+    #mainNavLogo::after{
+        content: "";
+        position: absolute;
+        height: 1px;
+        width: var(--navlogo-underline-width);
+        bottom: 1.5vh;
+        right:2px;
+        background-color: #000;
     }
 
     #mainNav.primary #mainNavLogo{
@@ -98,7 +109,7 @@
         align-items: center;
         justify-content: center;
         width: 100vw;
-        background-color: var(--secondary-bg-color);
+        background-color: var(--primary-bg-color);
         position: absolute;
         left:0;
         margin-left:0;
@@ -123,9 +134,16 @@
         text-align: center;
         margin: 0 5%;
         padding: 2vh 0;
+        opacity: 0;
+    }
+    #mainNav ul li:nth-of-type(even){
+        transform: translateX(-20px);
+    }
+    #mainNav ul li:nth-of-type(odd){
+        transform: translateX(20px);
     }
     #mainNav ul li:not(#mainNav ul li:nth-last-child(1)){
-        border-bottom: 2px solid var(--primary-bg-color);
+        border-bottom: 2px solid var(--secondary-bg-color);
     }
 
     #mainNav ul li a.active::after{
