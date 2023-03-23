@@ -73,6 +73,17 @@ React.useEffect(()=>{
         })    
     }});
 
+    const mainNavLogo = document.getElementById("mainNavLogo");
+    const mobileMainLogo = document.getElementById("mobileMainLogo");
+    window.addEventListener("scroll", scrollHandle);
+    function scrollHandle(){
+        if(mobileMainLogo.getBoundingClientRect().top >= 0){
+            mainNavLogo.style.display = "none";
+        }else{
+            mainNavLogo.style.display = "initial";
+        }
+    }
+
 },[]);
 
 
@@ -82,6 +93,7 @@ React.useEffect(()=>{
         <div id="pageID" data-id="home"></div>
         
         <section id="mainLandingPage" className="center">
+            <div id="mobileMainLogo" className="mobile">Mt Promiseland Farm</div>
             <img onLoad={mainPhotoAnims} src="./img/mainpic.png" alt="Picture of the Family" />
         </section>
 

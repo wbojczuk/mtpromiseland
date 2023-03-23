@@ -275,3 +275,26 @@ footer .credits{
 .social-icon.instagram{
     background-image: url('./img/instagram_icon.svg');
 }
+@media only screen and (max-width: 650px) {
+    #mainLandingPage{
+        height: 60vh;
+        padding-top: 4vw;
+        width: 100vw;
+        background-image: url("./img/mainbg.jpg");
+        background-size: cover;
+        background-position: bottom;
+    }
+    #mainLandingPage img{
+        width: 100vw;
+        clip-path: polygon(0 0, 100% 1%, 100% 0, 0 0);
+    }
+    #mobileMainLogo{
+        position: absolute;
+        width: 100%;
+        left:0;
+        top: 10%;
+        font-size: 4vh;
+        text-align: center;
+        font-family: "La Belle Aurore", cursive;
+    }
+}
