@@ -82,6 +82,32 @@ router.get("/blogs/categories", (req,res)=>{
         res.json(categories);
 })
 
+// DELETE BLOG BY ID
+router.delete("/blogs/:blogid", async (req, res)=>{
+    if(req.user){
+        fs.rm(path.join(__dirname , `blogs/${req.params.blogid}.txt`),(err)=>{
+            if(err){
+                console.log(err)
+                res.status = 500;
+            }else{
+                const blogsLength = data.blogs.length;
+                for(let i = 0; i < blogsLength; ++i){
+                    if(data.blogs[i].id == req.params.blogid){
+                        data.blogs.splice(i, 1);
+                        break;
+                    }
+                }
+                saveBlogs();
+                res.sendStatus(200)
+            }
+        });
+    
+}else{
+    res.json({"Error": "You need to be logged in to perform this action."})
+    res.status = 406;
+}
+})
+
 
 // GET BLOGS BY TAG
 // router.get("/blogs/category/:tag", (req,res)=>{
