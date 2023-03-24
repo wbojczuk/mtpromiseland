@@ -31,7 +31,7 @@
             let tagHTML = "";
             let counter = 0;
             categories.forEach((category)=>{
-                tagHTML += `<label for="tag${counter}">${category}</label><input type="checkbox" name="tag${counter}" id="tag${counter}">`;
+                tagHTML += `<input type="checkbox" name="tag${counter}" id="tag${counter}"><label for="tag${counter}">${category}</label><br>`;
                 ++counter;
             })
             document.getElementById("tagsContainer").innerHTML = tagHTML;
@@ -103,7 +103,8 @@
             fetch("/api/blogs", {method: "POST", headers:{"Content-Type": "application/json"},
                 body: JSON.stringify({
                     id: getUUID(),
-                    img: "./img/blogbg1.png",
+                    // UPDATE TO ACCEPT IMG
+                    img: (true == false) ? "img" : "https://i.imgur.com/l07w2wq.png",
                     title: document.getElementById("blogTitle").value,
                     description: document.getElementById("blogDescription").value,
                     tags: selectedTags,

@@ -34,7 +34,7 @@ router.route("/blogs")
                 // GET CURRENT BLOG ID
                 await fspromise.writeFile(path.join(__dirname,`blogs/${sentData.id}.txt`), sentData.content, (err)=>{if(err){console.log(err); res.sendStatus(503)}});
 
-                const newBlog = {id: sentData.id, title: sentData.title, description: sentData.description, content: `${sentData.id}.txt`, tags: sentData.tags};
+                const newBlog = {id: sentData.id, img: sentData.img,  title: sentData.title, description: sentData.description, content: `${sentData.id}.txt`, tags: sentData.tags};
                 data.blogs.push(newBlog);
                 saveBlogs();
                 res.status = 200;
@@ -49,11 +49,56 @@ router.route("/blogs")
         res.json({"Error": "You need to be logged in to perform this action."})
         res.status = 406;
     }    
+});
+
+router.post("/editblog", async (req, res)=>{
+    if(req.user){
+        const sentData = req.body;
+        // Validate Properties Are there
+        if(sentData.title && sentData.id && sentData.content && sentData.description, sentData.tags){
+
+                //Update Blog Content
+                await fspromise.writeFile(path.join(__dirname,`blogs/${sentData.id}.txt`), sentData.content, (err)=>{if(err){console.log(err); res.sendStatus(503)}});
+                const updatedBlog = {id: sentData.id, img: sentData.img, title: sentData.title, description: sentData.description, content: `${sentData.id}.txt`, tags: sentData.tags};
+
+                const blogsLength = data.blogs.length;
+                for(let i = 0; i < blogsLength; ++i){
+                    if(data.blogs[i].id == sentData.id){
+                        data.blogs[i] = updatedBlog;
+                        saveBlogs();
+                        res.sendStatus(200);
+                        break;
+                    }
+                }   
+        
+        }else{
+            res.status = 406;
+        }
+    }else{
+        res.json({"Error": "You need to be logged in to perform this action."})
+        res.status = 406;
+    } 
 })
 
 
 router.post("/testing", (req, res)=>{
     console.log(req.body)
+})
+
+// GET BLOG DATA BY ID
+router.get("/blogs/id/:blogid", (req,res)=>{
+    const blogsLength = data.blogs.length;
+    for(let i = 0; i < blogsLength; ++i){
+        if(data.blogs[i].id == req.params.blogid){
+            res.json(data.blogs[i])
+            break;
+        }
+    }
+})
+
+// GET BLOG CONTENT BY ID
+router.get("/blogcontent/:blogid", (req,res)=>{
+    res.sendFile(path.join(__dirname, `blogs/${req.params.blogid}.txt`))
 })
 
 // GET LATEST 4 BLOGS
