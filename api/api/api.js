@@ -48,8 +48,12 @@ router.route("/blogs")
     }else{
         res.json({"Error": "You need to be logged in to perform this action."})
         res.status = 406;
-    }
-    
+    }    
+})
+
+
+router.post("/testing", (req, res)=>{
+    console.log(req.body)
 })
 
 // GET LATEST 4 BLOGS
@@ -66,9 +70,22 @@ router.get("/blogs/latest", (req,res)=>{
     }
 })
 
-// GET BLOGS BY TAG
-router.get("/blogs/category/:tag", (req,res)=>{
-    req.params.tag
+router.get("/blogs/categories", (req,res)=>{
+        const categories = [];
+        data.blogs.forEach((blog)=>{
+            blog.tags.forEach((tag)=>{
+                if(!categories.includes(tag)){
+                    categories.push(tag);
+                }
+            })
+        });
+        res.json(categories);
 })
+
+
+// GET BLOGS BY TAG
+// router.get("/blogs/category/:tag", (req,res)=>{
+//     req.params.tag
+// })
 
 module.exports = router;

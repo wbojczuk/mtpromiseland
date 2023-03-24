@@ -10,5 +10,13 @@ router.get("/", (req,res)=>{
     }
     
 })
+router.get("/blog_builder", (req,res)=>{
+    if(req.user){
+        res.sendFile(path.join(__dirname, ".." , "/secure/dashboard/blog_builder.html"));
+    }else{
+        res.redirect("/login");
+    }
+    
+})
 
 module.exports = router;

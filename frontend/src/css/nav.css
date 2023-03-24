@@ -157,7 +157,7 @@
         position: absolute;
         top: calc(50% - (5vh / 2));
         left:0;
-        background-image: url("img/hamburger_menu.svg");
+        background-image: url("/img/hamburger_menu.svg");
         background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;
@@ -169,7 +169,7 @@
         position: absolute;
         top: calc(50% - (5vh / 2));
         left:0;
-        background-image: url("img/exit.svg");
+        background-image: url("/img/exit.svg");
         background-size: 100%;
         background-repeat: no-repeat;
         background-position: center;

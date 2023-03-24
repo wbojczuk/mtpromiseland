@@ -49,7 +49,7 @@
     position: relative;
 }
 
-#blogResultNav .item.active::after{
+#blogResultNav .item::after{
     content: "";
     display: inline-block;
     position: absolute;
@@ -60,6 +60,10 @@
     border-radius: 50%;
     background-color: rgba(0, 0, 0,0.7);
     filter: blur(2px);
+    opacity: 0;
+}
+#blogResultNav .item.active::after{
+    opacity: 1;
 }
 
 div:has(#blogResultSection){

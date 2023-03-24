@@ -6,7 +6,7 @@ const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 
-const whitelist = ["http://localhost", "http://localhost:5173", "http://localhost:3000", "https://mtpromiseland.alwaysdata.net"];
+const whitelist = ["http://localhost", "http://localhost:5173", "http://localhost:3000", "https://mtpromiseland.alwaysdata.net", "http://127.0.0.1:3000"];
 const corsOptions = {
     origin: (origin, callback)=>{
         if(whitelist.includes(origin) || !origin){
@@ -36,13 +36,15 @@ app.use("/dashboard", require("./secure/dashboard.js"))
 app.use("/api", require("./api/api.js"));
 
 // SERVING THE STATIC FRONTEND
-// app.use(express.static("public"));
-// app.get("^/$|(index|blog)", (req, res)=>{
-//     res.sendFile(path.join(__dirname, "public" , "index.html"));
-// })
 
+app.use(express.static("public"));
+app.get("^/$|(index|blog)", (req, res)=>{
+    res.sendFile(path.join(__dirname, "public" , "index.html"));
+})
 // SERVING THE STATIC ADMIN PANEL
+app.use("/tinyEditor", express.static("public/tinymce"));
 app.use(express.static("secure"));
+
 
 
 app.listen(PORT);

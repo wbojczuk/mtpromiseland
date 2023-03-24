@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import BlogResult from "../components/BlogResult";
 import gsap from "gsap";
 import Vivus from "vivus";
+
 export default function Home(){
 
 const [blogs, setBlogs] = React.useState([]);

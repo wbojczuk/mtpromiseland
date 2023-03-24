@@ -24,7 +24,7 @@
     width: 100vw;
     height: 100vh;
     position: fixed;
-    z-index: 999;
+    z-index: 900;
     pointer-events: none;
 }
 #loadingAnimPlayer{
@@ -52,7 +52,7 @@ body{
     height: 85vh;
     padding-top: 4vw;
     width: 100vw;
-    background-image: url("./img/mainbg.jpg");
+    background-image: url("/img/mainbg.jpg");
     background-size: cover;
     background-position: bottom;
 }
@@ -108,7 +108,7 @@ body{
     height: 25vw;
     width: 20vw;
     position: relative;
-    background-image: url("./img/farmbg.png");
+    background-image: url("/img/farmbg.png");
     background-size: cover;
     overflow: show;
     margin-top: 4vw;
@@ -265,15 +265,15 @@ footer .credits{
 }
 
 .social-icon.youtube{
-    background-image: url('./img/youtube_icon.svg');
+    background-image: url('/img/youtube_icon.svg');
     background-size: 80%;
     background-position: center;
 }
 .social-icon.facebook{
-    background-image: url('./img/facebook_icon.svg');
+    background-image: url('/img/facebook_icon.svg');
 }
 .social-icon.instagram{
-    background-image: url('./img/instagram_icon.svg');
+    background-image: url('/img/instagram_icon.svg');
 }
 @media only screen and (max-width: 650px) {
     body{
@@ -283,7 +283,7 @@ footer .credits{
         height: 60vh;
         padding-top: 4vw;
         width: 100vw;
-        background-image: url("./img/mainbg.jpg");
+        background-image: url("/img/mainbg.jpg");
         background-size: cover;
         background-position: bottom;
     }
@@ -309,7 +309,7 @@ footer .credits{
     #imcarly{
         width: 30vw;
         height: 5vh;
-        top: -1.8vh;
+        top: -1vh;
         left: 8vw;
     }
     #mainDescription{
