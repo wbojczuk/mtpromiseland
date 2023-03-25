@@ -18,14 +18,6 @@ router.get("/blog_builder", (req,res)=>{
     }
     
 })
-router.get("/blog_manager", (req,res)=>{
-    if(req.user){
-        res.sendFile(path.join(__dirname, ".." , "/secure/dashboard/blog_manager.html"));
-    }else{
-        res.redirect("/login");
-    }
-    
-})
 router.get("/blog_editor", (req,res)=>{
     if(req.user){
         res.sendFile(path.join(__dirname, ".." , "/secure/dashboard/blog_editor.html"));
