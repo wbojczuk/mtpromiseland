@@ -9,7 +9,10 @@
 </head>
 <body>
     <label for="blogTitle">Title:</label><input type="text" name="blogTitle" id="blogTitle" placeholder="Blog Title"><br>
-    <label for="blogTitle">Description:</label><input type="text" name="blogDescription" id="blogDescription" placeholder="Blog Description"><br>
+   <textarea placeholder="Blog Description" name="blogDescription" id="blogDescription" cols="30" rows="10"></textarea><br>
+
+    <label for="blogImg">Thumbnail</label><input type="file" name="blogImg" id="blogImg" accept="image/*"><br>
+
     <label for="blogTags">Tags:</label><input type="text" placeholder="Add Tag">
     <div id="tagsContainer">
 
@@ -29,10 +32,8 @@
             const categories = await fetchData.json();
 
             let tagHTML = "";
-            let counter = 0;
-            categories.forEach((category)=>{
+            categories.forEach((category, counter)=>{
                 tagHTML += `<input type="checkbox" name="tag${counter}" id="tag${counter}"><label for="tag${counter}">${category}</label><br>`;
-                ++counter;
             })
             document.getElementById("tagsContainer").innerHTML = tagHTML;
         }
@@ -98,19 +99,35 @@
                     selectedTags.push(document.querySelector(`label[for="${checkbox.id}"]`).textContent.toLowerCase())
                 }
             })
-
+            let imgURL = null;
 
             fetch("/api/blogs", {method: "POST", headers:{"Content-Type": "application/json"},
                 body: JSON.stringify({
                     id: getUUID(),
                     // UPDATE TO ACCEPT IMG
-                    img: (true == false) ? "img" : "https://i.imgur.com/l07w2wq.png",
+                    img: (imgURL != null) ? "img" : "https://i.imgur.com/l07w2wq.png",
                     title: document.getElementById("blogTitle").value,
                     description: document.getElementById("blogDescription").value,
                     tags: selectedTags,
                     content: (document.getElementById("blogEditor").value)
                 })
             })
+
+            document.getElementById("blogImg").onchange = function(){
+                var file = this.files[0];
+                const formData = new FormData();
+                formData.append("image", file);
+                fetch("https://api.imgur.com/3/image", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Client-ID 7879aa609162d4c"
+                },
+                body: formData
+            }).then((res)=>res.json()).then((data)=>{
+                imgURL = data.data.link;
+                document.getElementById("blogImg").insertAdjacentHTML("afterend", `<img src="${imgURL}" style="width:100px;">`)
+            })
+            }
         })
     </script>
 </body>

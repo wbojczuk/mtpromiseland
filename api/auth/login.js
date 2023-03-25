@@ -18,9 +18,9 @@ passport.deserializeUser(function(user, cb) {
 });
 
 passport.use(new LocalStrategy(async function verify(username, password, cb) {
-  bcrypt.compare(password, "$2b$10$zGRhEHwWUG75POeii11CE.5XodkOoCUfVmgL.ENaB9yZ7NZO9KdU6")
+  bcrypt.compare(password, "$2a$10$FD94GJsdf0CM/fo40RJ7q.GMc5hEgOttx9e3ncS69h0lEkESkUwiW")
   .then((res)=>{
-    if(res){
+    if(res && username.trim().toLowerCase() == "mtpromiseland"){
       return cb(null, {username: username, password: password}); 
     }else{
       return cb(null, false)

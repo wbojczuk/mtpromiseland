@@ -10,7 +10,12 @@
 </head>
 <body>
     <label for="blogTitle">Title:</label><input type="text" name="blogTitle" id="blogTitle" placeholder="Blog Title"><br>
-    <label for="blogTitle">Description:</label><input type="text" name="blogDescription" id="blogDescription" placeholder="Blog Description"><br>
+
+    
+    <textarea name="blogDescription" id="blogDescription" placeholder="Blog Description" cols="30" rows="10"></textarea><br>
+
+    <label for="blogImg">Thumbnail</label><input type="file" name="blogImg" id="blogImg" accept="image/*"><br>
+
     <label for="blogTags">Tags:</label><input type="text" placeholder="Add Tag">
     <div id="tagsContainer">
 
@@ -95,7 +100,26 @@
 
         document.getElementById("blogTitle").value = blogData.title;
         document.getElementById("blogDescription").value = blogData.description;
+        document.getElementById("blogImg").insertAdjacentHTML("afterend", `<img id="blogImgPreview" src="${blogData.img}" style="width:100px;position: absolute;">`)
         tinymce.activeEditor.setContent(blogContent)
+
+
+        document.getElementById("blogImg").onchange = function(){
+                var file = this.files[0];
+                const formData = new FormData();
+                formData.append("image", file);
+                fetch("https://api.imgur.com/3/image", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Client-ID 7879aa609162d4c"
+                },
+                body: formData
+            }).then((res)=>res.json()).then((data)=>{
+                imgURL = data.data.link;
+                document.getElementById("blogImg").src = data.data.link;
+            })
+            }
+
 
         // Submit button listener
         document.getElementById("submitButton").addEventListener("click", ()=>{
