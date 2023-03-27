@@ -4,6 +4,7 @@ const LocalStrategy = require('passport-local');
 const path = require("path");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const sessionStorage = require("sessionstorage-for-nodejs");
 
 passport.serializeUser(function(user, cb) {
   process.nextTick(function() {
@@ -11,31 +12,90 @@ passport.serializeUser(function(user, cb) {
   });
 });
 
+
+
 passport.deserializeUser(function(user, cb) {
   process.nextTick(function() {
     return cb(null, user);
   });
 });
 
-passport.use(new LocalStrategy(async function verify(username, password, cb) {
-  bcrypt.compare(password, "$2a$10$FD94GJsdf0CM/fo40RJ7q.GMc5hEgOttx9e3ncS69h0lEkESkUwiW")
-  .then((res)=>{
-    if(res && username.trim().toLowerCase() == "mtpromiseland"){
-      return cb(null, {username: username, password: password}); 
-    }else{
-      return cb(null, false)
-    }
-  })
-  }));
+
 
   router.get("/", (req,res)=>{
     res.sendFile(path.join(__dirname + "../.." + "/secure/login.html"))
   })
 
-  router.post('/password', passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login'
-  }));
+  router.get("/failedlogin", (req, res)=>{
+
+    if(!isNaN(req.session.loginAttempts)){
+      if(req.session.loginAttempts <= 5){
+        req.session.loginAttempts += 1;
+        req.session.lastFailedAttempt = new Date().getTime();
+        req.session.save();
+      }
+    }else{
+      req.session.loginAttempts = 0;
+      req.session.lastFailedAttempt = new Date().getTime();
+      req.session.save();
+    }
+    
+    console.log(req.session.loginAttempts)
+    res.redirect("/login")
+  })
+
+  router.get("/successlogin", (req,res)=>{
+    console.log(req.session.loginAttempts)
+    if(!isNaN(req.session.loginAttempts) && req.session.loginAttempts >= 5){
+      if((new Date(req.session.lastFailedAttempt).getTime() + 60000) < new Date().getTime()){
+        req.session.loginAttempts = 0;
+        req.session.save();
+        res.redirect("/dashboard")
+      }else{
+        req.logout((err)=>{
+          if(err){console.log(err)}
+          res.redirect("/login")
+        })
+      }
+    }else{
+      res.redirect("/dashboard")
+    }
+  })
+
+  passport.use(new LocalStrategy(async function verify(username, password, cb) {
+    if(isNaN(sessionStorage.getItem("loginAttempts"))){
+      sessionStorage.setItem("loginAttempts", 0);
+      sessionStorage.setItem("lastLoginAttempt", 0);
+    }
+
+    const loginAttempts = parseInt(sessionStorage.getItem("loginAttempts"));
+    const lastLoginAttempt = parseInt(sessionStorage.getItem("lastLoginAttempt"));
+    
+    if((loginAttempts < 5 || (new Date()).getTime() > lastLoginAttempt + 1000)){
+
+    const isPasswordCorrect = await bcrypt.compare(password, "$2a$10$FD94GJsdf0CM/fo40RJ7q.GMc5hEgOttx9e3ncS69h0lEkESkUwiW");
+    if(isPasswordCorrect){
+        const isUsernameCorrect = await bcrypt.compare(username.trim().toLowerCase(), "$2a$10$pyGWq2wCJu.wBO8qifcZ3eFTvPsXGuFS5vg5kq7L.oXS5VCoDAspK");
+        if(isUsernameCorrect){
+          return cb(null, {username: username, password: password});
+        }else{
+            sessionStorage.setItem("loginAttempts", parseInt(sessionStorage.getItem("loginAttempts")) + 1)
+            sessionStorage.setItem("lastLoginAttempt", (new Date()).getTime())
+            return cb(null, false);
+        }
+    }else{
+      sessionStorage.setItem("loginAttempts", parseInt(sessionStorage.getItem("loginAttempts")) + 1)
+      sessionStorage.setItem("lastLoginAttempt", (new Date()).getTime())
+      return cb(null, false);
+    } 
+  }else{
+    return cb(null, false);
+  }
+      }));
+
+  router.post('/password', passport.authenticate('local', {failureRedirect: "/login?failed=true", successRedirect: "/dashboard"}));
+
+
 
   
 

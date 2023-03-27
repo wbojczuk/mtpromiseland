@@ -6,6 +6,12 @@ const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
 
+app.use(session({
+    secret: '123456',
+    resave: false,
+    saveUninitialized: true,
+  }));
+
 const whitelist = ["http://localhost", "http://localhost:5173", "http://localhost:3000", "https://mtpromiseland.alwaysdata.net", "http://127.0.0.1:3000"];
 const corsOptions = {
     origin: (origin, callback)=>{
@@ -23,11 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
-  }));
+
   
 app.use(passport.authenticate('session'));
 

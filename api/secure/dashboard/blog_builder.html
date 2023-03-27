@@ -59,17 +59,34 @@
             margin-right: 2vw;
         }
         #blogEditor{
-            height: 80vh;
+            display: inline-block;
+            height: 90vh;
+        }
+        #blogEditorContainer{
+            display: inline-block;
+            width: 80vw;
+            margin-left: 10%;
         }
 
         #submitButton{
             background-color: #91f1d6;
             width: 25vw;
             padding: 0.5vw 0;
-            border: 1px solid #757575;
+            border: 0px solid #757575;
             border-radius: 5px;
             cursor: pointer;
             font-family: sans-serif;
+            font-size: 1.5vw;
+            margin: 2vw 5vw;
+        }
+        #saveDraftButton{
+            background-color: #f19c91;
+            width: 25vw;
+            padding: 0.5vw 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: sans-serif;
+            border: 0px solid #757575;
             font-size: 1.5vw;
             margin: 2vw 5vw;
         }
@@ -82,8 +99,64 @@
         cursor: pointer;
         visibility: hidden;
     }
-        
+    /* Mobile Styles */
+@media only screen and (max-width: 650px) {
+    input[type="text"], textarea{
+            border-radius: 5px;
+            padding:1vh 1vh;
+            margin: 0.5vh 1vh;
+        }
+        #blogTitle{
+            width: 60vw; 
+        }
+        #blogDescription{
+            border-radius: 5px;
+            width: 75vw;
+        }
+        #blogImgPreview{
+            position: absolute;
+            max-width: 40vw;
+            max-height:20vw;
+            top: 2vh;
+            right:5vw;
+        }
+        #blogImgContainer{
+            position: relative;
+            left:2%;
+            padding: 2vh 0;
+            height:20vw;
+        }
+        #tagsContainer{
+            padding-bottom: 2vh;
+        }
+        #tagsContainer label{
+            margin-right: 2vw;
+        }
+        #blogEditorContainer{
+            display: inline-block;
+            width: 100%;
+            margin-left: 0;
+        }
 
+        #submitButton{
+            background-color: #91f1d6;
+            width: 40vw;
+            padding: 1vh 0;
+            font-size: 2vh;
+            margin: 1vh 1vh;
+        }
+        #saveDraftButton{
+            background-color: #f19c91;
+            width: 40vw;
+            padding: 1vh 0;
+            font-size: 2vh;
+            margin: 1vh 1vh;
+        }
+    #addTagButton{
+        padding: 0.25vh 1vh;
+        margin-right: 2vh;
+    }
+}
     </style>
 </head>
 <body>
@@ -125,9 +198,12 @@
 
     </div>
 
+<div id="blogEditorContainer">
     <textarea name="blogEditor" id="blogEditor" cols="30" rows="10"></textarea>
+</div>
 
-<div style="display: flex; align-items: center; justify-content: right;">
+<div style="display: flex; align-items: center; justify-content: center;">
+    <button data-savebutton="true" id="saveDraftButton">Save As Draft</button>
     <button id="submitButton">Post Blog</button>
 </div>
 
@@ -151,6 +227,11 @@
 
         tinymce.init({
             selector: "#blogEditor",
+            toolbar_mode: 'sliding',
+            mobile: {
+            menubar: true,
+            toolbar: true
+            },
             plugins: 'image',
             toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent| image',
             image_title: true,
@@ -198,7 +279,7 @@
         })
 
 
-        document.getElementById("submitButton").addEventListener("click", ()=>{
+        function postBlog(evt){
             jsdev.unsavedChanges.destroy();
             tinymce.triggerSave();
 
@@ -211,19 +292,29 @@
             })
             let imgURL = null;
 
-            fetch("/api/blogs", {method: "POST", headers:{"Content-Type": "application/json"},
-                body: JSON.stringify({
+            const bodyVal = {
                     id: new Date().getTime(),
                     // UPDATE TO ACCEPT IMG
-                    img: (imgURL != null) ? "img" : "https://i.imgur.com/l07w2wq.png",
+                    img: (imgURL != null) ? imgURL : "https://i.imgur.com/l07w2wq.png",
                     title: document.getElementById("blogTitle").value,
                     description: document.getElementById("blogDescription").value,
                     tags: selectedTags,
-                    content: (document.getElementById("blogEditor").value)
-                })
+                    content: (document.getElementById("blogEditor").value),
+                    isdraft: false
+                };
+
+                if(evt.currentTarget.hasAttribute("data-savebutton")){
+                    bodyVal.isdraft = true;
+                }
+
+            fetch("/api/blogs", {method: "POST", headers:{"Content-Type": "application/json"},
+                body:  JSON.stringify(bodyVal)
             }).then(()=>{window.location.href = "/dashboard";})
 
-            document.getElementById("blogImg").onchange = function(){
+        }
+
+
+        document.getElementById("blogImg").onchange = function(){
                 var file = this.files[0];
                 const formData = new FormData();
                 formData.append("image", file);
@@ -238,7 +329,13 @@
                 document.getElementById("blogImgPreview").src = imgURL;
             }).catch((err)=>{console.log(err)})
             }
+
+        document.getElementById("submitButton").addEventListener("click", (evt)=>{
+            if(confirm("Are you sure you want to post this blog?")){
+                postBlog(evt)
+            }
         })
+        document.getElementById("saveDraftButton").addEventListener("click", postBlog)
 
         // ADD TAG COMPONENT
         document.getElementById("addTag").addEventListener("input", (evt)=>{

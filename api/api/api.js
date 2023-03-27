@@ -6,6 +6,16 @@ const path = require("path");
 const fspromise = require("fs/promises")
 data.blogs = require("./blogdata.json");
 
+function filter_blogs(item){
+    return (item.isdraft == false)
+}
+function filter_drafts(item){
+    return (item.isdraft == true)
+}
+const blogs = ()=>{return (data.blogs.filter(filter_blogs)).reverse()};
+const drafts = ()=>{return data.blogs.filter(filter_drafts)};
+
+// START BLOG API
 function idExists(id){
     let retval = false;
     data.blogs.forEach((blog)=>{
@@ -17,12 +27,12 @@ function idExists(id){
 }
 
 function saveBlogs(){
-    fs.writeFile("./api/blogdata.json", JSON.stringify(data.blogs), (err)=>{if(err){console.log(err); res.status = 503;}})
+    fs.writeFile(path.join(__dirname ,"api/blogdata.json"), JSON.stringify(data.blogs), (err)=>{if(err){console.log(err);}})
 }
 
 router.route("/blogs")
 .get((req, res)=>{
-    res.json(data.blogs);
+    res.json(blogs());
 })
 .post(async (req, res)=>{
     if(req.user){
@@ -34,7 +44,7 @@ router.route("/blogs")
                 // GET CURRENT BLOG ID
                 await fspromise.writeFile(path.join(__dirname,`blogs/${sentData.id}.txt`), sentData.content, (err)=>{if(err){console.log(err); res.sendStatus(503)}});
 
-                const newBlog = {id: sentData.id, img: sentData.img,  title: sentData.title, description: sentData.description, content: `${sentData.id}.txt`, tags: sentData.tags};
+                const newBlog = {id: sentData.id, isdraft: sentData.isdraft, img: sentData.img,  title: sentData.title, description: sentData.description, content: `${sentData.id}.txt`, tags: sentData.tags};
                 data.blogs.push(newBlog);
                 saveBlogs();
                 res.status = 200;
@@ -59,7 +69,7 @@ router.post("/editblog", async (req, res)=>{
 
                 //Update Blog Content
                 await fspromise.writeFile(path.join(__dirname,`blogs/${sentData.id}.txt`), sentData.content, (err)=>{if(err){console.log(err); res.sendStatus(503)}});
-                const updatedBlog = {id: sentData.id, img: sentData.img, title: sentData.title, description: sentData.description, content: `${sentData.id}.txt`, tags: sentData.tags};
+                const updatedBlog = {id: sentData.id, isdraft: sentData.isdraft, img: sentData.img, title: sentData.title, description: sentData.description, content: `${sentData.id}.txt`, tags: sentData.tags};
 
                 const blogsLength = data.blogs.length;
                 for(let i = 0; i < blogsLength; ++i){
@@ -80,11 +90,6 @@ router.post("/editblog", async (req, res)=>{
     } 
 })
 
-
-router.post("/testing", (req, res)=>{
-    console.log(req.body)
-})
-
 // GET BLOG DATA BY ID
 router.get("/blogs/id/:blogid", (req,res)=>{
     const blogsLength = data.blogs.length;
@@ -103,21 +108,23 @@ router.get("/blogcontent/:blogid", (req,res)=>{
 
 // GET LATEST 4 BLOGS
 router.get("/blogs/latest", (req,res)=>{
-    const blogsLength = data.blogs.length;
+    const curBlogs = blogs();
+    const blogsLength = curBlogs.length;
     if(blogsLength > 4){
         const retval = [];
         for(let i = blogsLength - 4; i < blogsLength; ++i){
-            retval.push(data.blogs[i]);
+            retval.push(curBlogs[i]);
         }
         res.json(retval);
     }else{
-        res.json(data.blogs);
+        res.json(curBlogs);
     }
 })
 
 router.get("/blogs/categories", (req,res)=>{
         const categories = [];
-        data.blogs.forEach((blog)=>{
+        const curBlogs = blogs();
+        curBlogs.forEach((blog)=>{
             blog.tags.forEach((tag)=>{
                 if(!categories.includes(tag)){
                     categories.push(tag);
@@ -153,10 +160,24 @@ router.delete("/blogs/:blogid", async (req, res)=>{
 }
 })
 
+// END BLOGS API
 
-// GET BLOGS BY TAG
-// router.get("/blogs/category/:tag", (req,res)=>{
-//     req.params.tag
-// })
+router.get("/blogsanddrafts", (req, res)=>{
+    res.json(data.blogs);
+})
+
+// START DRAFTS API
+
+
+router.route("/drafts")
+.get(async (req, res)=>{
+    res.json(drafts())
+})
+.post(async (req, res)=>{
+
+})
+.delete(async (req,res)=>{
+
+})
 
 module.exports = router;
