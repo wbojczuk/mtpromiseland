@@ -184,6 +184,7 @@ body{
 .blog-result img{
     width: 40%;
     height: 100%;
+    object-fit: cover;
     margin-left: 5%;
     margin-right: 0;
 }
@@ -381,7 +382,8 @@ footer .credits{
     }
     .blog-result img{
         width: 30%;
-        height: 90%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
         margin-top: 1%;
         margin-right: 0;
     }

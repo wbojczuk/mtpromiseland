@@ -89,6 +89,7 @@ div:has(#blogResultSection){
 .blog-result-page img{
     width: 40%;
     height: 100%;
+    object-fit: cover;
     margin-left: 5%;
     margin-right: 0;
 }
@@ -189,7 +190,8 @@ div:has(#blogResultSection){
     }
     .blog-result-page img{
         width: 30%;
-        height: 90%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
         margin-top: 1%;
         margin-right: 0;
     }
