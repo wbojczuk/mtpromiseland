@@ -23,7 +23,7 @@ export default function Blog(){
 
         const [currentTag, setCurrentTag] = React.useState("all");
 
-        const [blogCategories, setBlogCategories] = React.useState(["test"]);
+        const [blogCategories, setBlogCategories] = React.useState([]);
         const blogCategoryComponents = blogCategories.map((blogCategory)=>{
             return(
                 <Link onClick={triggerReload} key={blogCategory} className="item" to={`/blog?tag=${blogCategory}`}>{jsdev.wordsToUpperCase(blogCategory)}</Link>
