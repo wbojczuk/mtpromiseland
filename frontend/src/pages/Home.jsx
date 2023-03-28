@@ -13,7 +13,6 @@ export default function Home(){
 const [blogs, setBlogs] = React.useState([]);
 const blogComponents = blogs.map((blog, index)=>{
     const isEven = (index == 0 || index % 2 == 0);
-    console.log(blog)
     return(
         <BlogResult even={isEven} key={blog.id} {...blog} />
     )

@@ -16,6 +16,12 @@
     align-items: center;
     justify-content: center;
 }
+.center-full{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+}
 
 #loadingAnim{
     display: flex;
@@ -151,6 +157,12 @@ body{
     background-color:#FCFCFC;
     z-index: 10;
 }
+#recentPosts{
+    display: inline-block;
+    width: 90%;
+    margin-left: 5%;
+}
+
 .center:has(#recentPostsTitle){
     position: relative;
 }
@@ -172,7 +184,7 @@ body{
 .blog-result{
     display: flex;
     justify-content: space-between;
-    height: 22vw;
+    height: 15vw;
     width: 100%;
     margin: 4vw 0;
     text-decoration: none;
@@ -211,7 +223,7 @@ body{
     position: relative;
     width: 100%;
     font-family: "Lustria", serif;
-    font-size: 3.5vw;
+    font-size: 3vw;
     padding-bottom: 1vw;
 }
 .blog-result .content .description{
@@ -350,6 +362,8 @@ footer .credits{
     .center:has(#recentPostsTitle)::after{
         height: 2px;
     }
+
+    
     
     
     
