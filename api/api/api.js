@@ -27,7 +27,7 @@ function idExists(id){
 }
 
 function saveBlogs(){
-    fs.writeFile(path.join(__dirname ,"api/blogdata.json"), JSON.stringify(data.blogs), (err)=>{if(err){console.log(err);}})
+    fs.writeFile(path.join(__dirname ,"blogdata.json"), JSON.stringify(data.blogs), (err)=>{if(err){console.log(err);}})
 }
 
 router.route("/blogs")
@@ -112,7 +112,7 @@ router.get("/blogs/latest", (req,res)=>{
     const blogsLength = curBlogs.length;
     if(blogsLength > 4){
         const retval = [];
-        for(let i = blogsLength - 4; i < blogsLength; ++i){
+        for(let i = 0; i < 4; ++i){
             retval.push(curBlogs[i]);
         }
         res.json(retval);
