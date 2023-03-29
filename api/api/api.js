@@ -4,7 +4,7 @@ const data = {};
 const fs = require("fs");
 const path = require("path");
 const fspromise = require("fs/promises")
-data.blogs = require("./blogdata.json");
+data.blogs = require(path.join(__dirname, "blogdata.json"));
 
 function filter_blogs(item){
     return (item.isdraft == false)

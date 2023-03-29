@@ -362,9 +362,6 @@ footer .credits{
     .center:has(#recentPostsTitle)::after{
         height: 2px;
     }
-
-    
-    
     
     
     /* BLOG RESULT COMPONENT STYLES */

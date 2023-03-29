@@ -125,11 +125,11 @@ React.useEffect(()=>{
             <div id="blogResultNav">
                 {blogCategoryComponents}
             </div>
-            <div className="center-full" style={{display: "inline-block", margin: "2% 0 1% 0"}}>
-                <Pagination reload={blogResults} items={blogResultComponents} setPagedItems={setPagedItems} showAmt={4} itemsPerPage={4}/>
-            </div>
             <div id="blogResultSection">
                 {pagedItems}
+            </div>
+            <div className="center-full" style={{display: "inline-block", margin: "2% 0 1% 0"}}>
+                <Pagination reload={blogResults} items={blogResultComponents} setPagedItems={setPagedItems} showAmt={4} itemsPerPage={4}/>
             </div>
             
             

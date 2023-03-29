@@ -20,6 +20,7 @@
     height: 3vw;
     width: 80%;
     left: 10%;
+    margin: 1vw 0;
 }
 #blogResultNav::after{
     content:"";
