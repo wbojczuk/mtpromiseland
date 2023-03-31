@@ -20,7 +20,7 @@
     height: 3vw;
     width: 80%;
     left: 10%;
-    margin: 1vw 0;
+    margin: 2vw 0;
 }
 #blogResultNav::after{
     content:"";
@@ -28,12 +28,37 @@
     position: absolute;
     width: 80%;
     height: 1px;
-    top:0;
+    top:-1vw;
     left:10%;
-    background-color: #4f5849;
+    background-color: #b3c1a9;
+}
+#blogResultNav .item.active{
+    background-color: #b3c1a993;
+    text-decoration: underline;
+}
+.glide__track-blog {
+    margin:auto;
+  }
+  .glide-blog{
+    display: inline-block;
+    width: 50%;
+  }
+  .glide__arrow-blog{
+    background-color: #b3c1a9;
+    color: black;
+    font-weight: 500;
+    font-size: 1.2vw;
+}
+.glide__arrow--left-blog{
+    left: -10%;
+}
+.glide__arrow--right-blog{
+    right: -10%;
 }
 #blogResultNav .item{
-    width: 7vw;
+    display: inline-block;
+    min-width: 7vw;
+    height: 2vw;
     font-size: 1.2vw;
     border: 1px solid rgba(0, 0, 0, 0.574);
     border-radius: 20px;
@@ -47,23 +72,6 @@
     text-decoration: none;
     margin: 0 0.5vw;
     position: relative;
-}
-
-#blogResultNav .item::after{
-    content: "";
-    display: inline-block;
-    position: absolute;
-    left:0;
-    bottom: -7px;
-    height: 4px;
-    width: 100%;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0,0.7);
-    filter: blur(2px);
-    opacity: 0;
-}
-#blogResultNav .item.active::after{
-    opacity: 1;
 }
 
 div:has(#blogResultSection){
@@ -135,17 +143,32 @@ div:has(#blogResultSection){
     #blogResultNav{
         height: 3vh;
         width: 90%;
-        margin-top: 2vh;
+        margin: 4vh 0;
         left: 5%;
     }
     #blogResultNav::after{
         width: 100%;
-        top:-1vh;
+        top:-2vh;
         left:0%;
     }
+    .glide-blog{
+        display: inline-block;
+        width: 90%;
+      }
+      .glide__arrow-blog{
+        background-color: #b3c1a9;
+        font-size: 2vh;
+    }
+    .glide__arrow--left-blog{
+        left: -10%;
+    }
+    .glide__arrow--right-blog{
+        right: -10%;
+    }
     #blogResultNav .item{
-        width: 8vh;
-        font-size: 1.6vh;
+        width: 10vh;
+        height: 3vh;
+        font-size: 1.8vh;
         margin: 0 0.5vh;
     }
 

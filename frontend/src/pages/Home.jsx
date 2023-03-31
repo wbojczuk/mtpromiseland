@@ -1,15 +1,13 @@
-// IMPLEMENT IMAGES LOADED
-
 import React from "react";
-import Nav from "../components/Nav";
 import Glide from "@glidejs/glide";
 import {Link} from "react-router-dom";
 import BlogResult from "../components/BlogResult";
 import gsap from "gsap";
 import Vivus from "vivus";
 
-export default function Home(){
+export default function Home(props){
 
+    // Set Latest Blogs
 const [blogs, setBlogs] = React.useState([]);
 const blogComponents = blogs.map((blog, index)=>{
     const isEven = (index == 0 || index % 2 == 0);
@@ -18,6 +16,7 @@ const blogComponents = blogs.map((blog, index)=>{
     )
 })
 
+// Onload Main Hero/Photo Animations
 function mainPhotoAnims(evt){
     gsap.to(evt.currentTarget, {
         "clip-path": "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
@@ -27,6 +26,8 @@ function mainPhotoAnims(evt){
 }
 
 React.useEffect(()=>{
+    // UPDATE NAV
+    props.setCheckLinks(["close"]);
 
     new Glide('.glide', {
         type: "slider",
@@ -52,6 +53,7 @@ React.useEffect(()=>{
         }
     }
 
+    // Recent Posts Title ANimation
     jsdev.intersectionTrigger("#recentPostsTitle",{onTrigger:()=>{
         gsap.to("html", {
             "--recent-blog-title-width": "104%",
@@ -59,8 +61,8 @@ React.useEffect(()=>{
             ease: "power4.out",
             duration: 3
         });
-    }
-    , onExit: ()=>{
+    },
+    onExit: ()=>{
         gsap.to("html", {
             "--recent-blog-title-width": "0%",
             "--recent-blog-title-left": "50%",
@@ -69,6 +71,7 @@ React.useEffect(()=>{
         });
     }});
 
+    // "I'm Carly" SVG Animation
     jsdev.intersectionTrigger("#imcarly", {thresholdOut: null, onTrigger: ()=>{
         gsap.to("#mainHeader h2", {
             x: 0,
@@ -79,17 +82,19 @@ React.useEffect(()=>{
         new Vivus("imcarly", {type: "oneByOne", duration: 200, file: "./img/imcarly.svg"})
     }});
 
+    // Mobile nav logo "home specific" listeners
     const mainNavLogo = document.getElementById("mainNavLogo");
     const mobileMainLogo = document.getElementById("mobileMainLogo");
     window.addEventListener("scroll", handleScroll);
+
     function handleScroll(){
         if(document.getElementById("pageID").dataset.id == "home" && window.matchMedia("only screen and (max-width: 650px)").matches){
-        if(mobileMainLogo.getBoundingClientRect().top >= 0){
-            mainNavLogo.style.display = "none";
-        }else{
-            mainNavLogo.style.display = "inline-flex";
+            if(mobileMainLogo.getBoundingClientRect().top >= 0){
+                mainNavLogo.style.display = "none";
+            }else{
+                mainNavLogo.style.display = "inline-flex";
+            }
         }
-    }
     }
 
 },[]);
@@ -121,16 +126,16 @@ React.useEffect(()=>{
             <div className="glide">
             <div data-glide-el="track" className="glide__track">
                 <ul className="glide__slides">
-                <li className="glide__slide"><Link to={`blog?tag=all`}><div>All Blogs</div></Link></li>
-                <li className="glide__slide"><Link to={`blog?tag=farm`}><div>Farm</div></Link></li>
-                <li className="glide__slide"><Link to={`blog?tag=projects`}><div>Projects</div></Link></li>
-                <li className="glide__slide"><Link to={`blog?tag=family`}><div>Family</div></Link></li>
-                <li className="glide__slide"><Link to={`blog?tag=recipes`}><div>Recipes</div></Link></li>
+                <li className="glide__slide glide-slide-home"><Link to={`blog?tag=all`}><div>All Blogs</div></Link></li>
+                <li className="glide__slide glide-slide-home"><Link to={`blog?tag=farm`}><div>Farm</div></Link></li>
+                <li className="glide__slide glide-slide-home"><Link to={`blog?tag=projects`}><div>Projects</div></Link></li>
+                <li className="glide__slide glide-slide-home"><Link to={`blog?tag=family`}><div>Family</div></Link></li>
+                <li className="glide__slide glide-slide-home"><Link to={`blog?tag=recipes`}><div>Recipes</div></Link></li>
                 </ul>
             </div>
             <div className="glide__arrows" data-glide-el="controls">
-                <button className="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
-                <button className="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+                <button className="glide__arrow glide__arrow--left glide-arrow-home" data-glide-dir="<">prev</button>
+                <button className="glide__arrow glide__arrow--right glide-arrow-home" data-glide-dir=">">next</button>
             </div>
         </div>
 

@@ -109,7 +109,7 @@ body{
     width: 100vw;
     position: relative;
 }
-.glide__slide a{
+.glide-slide-home a{
     display: inline-block;
     height: 25vw;
     width: 20vw;
@@ -122,7 +122,7 @@ body{
     /* transform-origin: right;
     transform: rotateZ(2deg); */
 }
-.glide__slide a div{
+.glide-slide-home a div{
     color: black;
     display: inline-block;
     position: absolute;
@@ -345,7 +345,7 @@ footer .credits{
         top: -1vh;
         left: 2.5vh;
     }
-    .glide__arrow{
+    .glide-arrow-home{
         display: none;
     }
 

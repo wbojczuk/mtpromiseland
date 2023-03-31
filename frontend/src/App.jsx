@@ -5,14 +5,17 @@ import Blog from "./pages/Blog";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 export default function App(){
+    // TRIGGER NAV LINKS
+    const [checkLinks, setCheckLinks] = React.useState(["close"]);
+    
+
     return(
         <>
-        
        <BrowserRouter>
-       <Nav />
+       <Nav checkLinks={checkLinks} setCheckLinks={setCheckLinks} />
         <Routes>
-            <Route index element={<Home />}/>
-            <Route path="/blog" element={<Blog />}/>
+            <Route index element={<Home setCheckLinks={setCheckLinks} />}/>
+            <Route path="/blog" element={<Blog setCheckLinks={setCheckLinks} />}/>
         </Routes>
        </BrowserRouter>
        <Footer />

@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
-export default function Nav(){
-    const [checkLinks, setCheckLinks] = React.useState(["close"]);
+export default function Nav(props){
+    
     React.useEffect(()=>{
         
         if(document.getElementById("pageID")){
@@ -16,7 +16,7 @@ export default function Nav(){
             })
 
             if(window.matchMedia("only screen and (max-width: 650px)").matches){
-                if(document.getElementById("pageID").dataset.id == "home" && mobileMainLogo.getBoundingClientRect().top >= 0 && checkLinks[0] == "close"){
+                if(document.getElementById("pageID").dataset.id == "home" && mobileMainLogo.getBoundingClientRect().top >= 0 && props.checkLinks[0] == "close"){
                     mainNavLogo.style.display = "none";
                 }else{
                     mainNavLogo.style.display = "inline-flex";
@@ -31,11 +31,11 @@ export default function Nav(){
                 mainNav.classList.add("primary");
             }
         }
-    }, [checkLinks]);
+    }, [props.checkLinks]);
 
 
     function openMenu(){
-        setCheckLinks(["open"]);
+        props.setCheckLinks(["open"]);
     if(window.matchMedia("only screen and (max-width: 650px)").matches){
 
         const mainNavLogo = document.getElementById("mainNavLogo");
@@ -81,7 +81,7 @@ export default function Nav(){
     }
     }
     function closeMenu(){
-        setCheckLinks(["close"]);
+        props.setCheckLinks(["close"]);
         if(window.matchMedia("only screen and (max-width: 650px)").matches){
         if(document.getElementById("pageID").dataset.id == "home" && mobileMainLogo.getBoundingClientRect().top >= 0){
             mainNavLogo.style.display = "none";
