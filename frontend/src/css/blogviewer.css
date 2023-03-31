@@ -1,0 +1,93 @@
+#blogViewerWrapper{
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--secondary-bg-color);
+    margin-top: 6vw;
+}
+#blogViewerContainer{
+    display: inline-block;
+    min-height: 100vh;
+    width: 70%;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+    margin-left: 15%;
+    background-color: var(--light-bg-color);
+}
+
+#blogViewerDate{
+    font-family: "Kanit", sans-serif;
+    font-weight: 200;
+    margin: 1vw 2vw;
+    font-size: 1.2vw;
+}
+#blogViewerTitle{
+    font-family: "La Belle Aurore", cursive;
+    line-height: 95%;
+    margin: 0 2vw;
+    font-size: 4vw;
+    display: inline-block;
+    max-width: 60%;
+}
+
+#blogViewerContent{
+    display: inline-block;
+    width: 90%;
+    margin-left: 5%;
+    font-size: 1.1vw;
+    font-family: "Kanit", sans-serif;
+    font-weight: 300;
+    line-height: 200%;
+    margin-top: 3vw;
+    padding-bottom: 2vw;
+}
+#blogViewerShareContainer{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin: 1vw;
+}
+#blogViewerShareContainer a img{
+    width: 7vw;
+    margin: 0 0.5vw;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 650px) {
+    #blogViewerShareContainer{
+        margin: 1vh;
+    }
+    #blogViewerShareContainer a img{
+        width: 7vh;
+        margin: 0 0.5vh;
+    }
+    #blogViewerWrapper{
+        margin-top: 2vh;
+        width: 100%;
+    }
+    #blogViewerContainer{
+        width: 95%;
+        margin-top: 2vh;
+        margin-bottom: 2vh;
+        margin-left: 2.5%;
+    }
+    
+    #blogViewerDate{
+        margin: 1vh 2vh;
+        font-size: 1.5vh;
+    }
+    #blogViewerTitle{
+        line-height: 95%;
+        margin: 0 2vh;
+        font-size: 4vh;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    #blogViewerContent{
+        width: 95%;
+        margin-left: 2.5%;
+        font-size: 1.5vh;
+        margin-top: 3vh;
+        padding-bottom: 2vh;
+    }
+}

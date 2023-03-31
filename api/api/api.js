@@ -104,7 +104,7 @@ router.get("/blogs/id/:blogid", (req,res)=>{
 // GET BLOG CONTENT BY ID
 router.get("/blogcontent/:blogid", (req,res)=>{
     res.sendFile(path.join(__dirname, `blogs/${req.params.blogid}.txt`))
-})
+});
 
 // GET LATEST 4 BLOGS
 router.get("/blogs/latest", (req,res)=>{
@@ -119,7 +119,7 @@ router.get("/blogs/latest", (req,res)=>{
     }else{
         res.json(curBlogs);
     }
-})
+});
 
 router.get("/blogs/categories", (req,res)=>{
         const categories = [];

@@ -4,7 +4,7 @@ export default function Footer(){
         <footer>
             <div className="title">Mt Promiseland Farm</div>
             <div className="center">
-                <a className="youtube social-icon" href="https://youtube.com" target="_blank"></a>
+                <a className="youtube social-icon" href="https://www.youtube.com/@mtpromiselandfarm" target="_blank"></a>
                 <a className="facebook social-icon" href="https://facebook.com" target="_blank"></a>
                 <a className="instagram social-icon" href="https://www.instagram.com/mtpromiselandfarm" target="_blank"></a>
             </div>
@@ -12,3 +12,4 @@ export default function Footer(){
         </footer>
     )
 }
+
