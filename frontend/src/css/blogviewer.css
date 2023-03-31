@@ -1,6 +1,6 @@
 #blogViewerWrapper{
     min-height: 100vh;
-    width: 100%;
+    width: 100vw;
     background-color: var(--secondary-bg-color);
     margin-top: 6vw;
 }
@@ -61,14 +61,18 @@
         margin: 0 0.5vh;
     }
     #blogViewerWrapper{
+        position: relative;
         margin-top: 2vh;
         width: 100%;
+        /* padding-left: 10%; */
     }
     #blogViewerContainer{
+        position: relative;
         width: 95%;
         margin-top: 2vh;
         margin-bottom: 2vh;
-        margin-left: 2.5%;
+        margin-left: 0;
+        left: 2.5%;
     }
     
     #blogViewerDate{
@@ -79,7 +83,6 @@
         line-height: 95%;
         margin: 0 2vh;
         font-size: 4vh;
-        width: 100%;
         max-width: 100%;
     }
     
