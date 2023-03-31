@@ -40,7 +40,7 @@ app.use("/api", require("./api/api.js"));
 // SERVING THE STATIC FRONTEND
 
 app.use(express.static("public"));
-app.get("^/$|(index|blog)", (req, res)=>{
+app.get("^/$|(index|blog|view)", (req, res)=>{
     res.sendFile(path.join(__dirname, "public" , "index.html"));
 })
 // SERVING THE STATIC ADMIN PANEL
