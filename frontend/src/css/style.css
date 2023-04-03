@@ -184,7 +184,7 @@ body{
 .blog-result{
     display: flex;
     justify-content: space-between;
-    height: 15vw;
+    min-height: 15vw;
     width: 100%;
     margin: 4vw 0;
     text-decoration: none;
@@ -195,7 +195,7 @@ body{
 }
 .blog-result img{
     width: 40%;
-    height: 100%;
+    height: 15vw;
     object-fit: cover;
     margin-left: 5%;
     margin-right: 0;
@@ -288,6 +288,77 @@ footer .credits{
 .social-icon.instagram{
     background-image: url('/img/instagram_icon.svg');
 }
+
+/* Tablet Styles */
+@media only screen and (min-width: 651px) and (max-width: 959px){
+    #mainLandingPage img{
+        width: 90vw;
+        clip-path: polygon(0 0, 100% 1%, 100% 0, 0 0);
+    }
+    
+    /* SECOND SECTION */
+    #mainHeader{
+        width: 30vw;
+    }
+    #mainHeader h2{
+        font-size: 7vw;
+    }
+    #imcarly{
+        width: 18vw;
+        height: 6vw;
+    }
+    #mainDescription{
+        font-size: 2vw;
+        width: 80%;
+    }
+    .glide-slide-home a{
+        display: inline-block;
+        height: 28vw;
+        width: 22vw;
+    }
+    .glide-slide-home a div{
+        font-size: 3vw;
+        left: 10%;
+    }
+    
+    
+    #recentPostsTitle{
+        font-size: 6vw;
+    }
+
+    /* BLOG RESULT COMPONENT STYLES */
+    .blog-result{
+        min-height: 18vw;
+        margin: 5vw 0;
+    }
+    .blog-result .content .title{
+        font-size: 4vw;
+    }
+    .blog-result .content .description{
+        text-align: left;
+        width: 95%;
+        margin-left: 5%;
+        font-family: "Kanit", sans-serif;
+        font-size: 1.8vw;
+        font-weight: 300;
+    }
+    .blog-result img{
+        height: 18vw;
+    }
+    
+    footer .title{
+        font-size: 2vw;
+    }
+    footer .credits{
+        font-size: 1.5vw;
+    }
+    .social-icon{
+        width: 8vw;
+        margin: 0 0.5vw;
+    }
+}
+
+/* Mobile Styles */
 @media only screen and (max-width: 650px) {
     body{
         padding-top: 4vh;
