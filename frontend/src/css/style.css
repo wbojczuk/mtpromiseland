@@ -463,10 +463,16 @@ footer .credits{
         padding-bottom: 0.1vh;
     }
     .blog-result img{
-        width: 30%;
+        width: 40%;
         aspect-ratio: 1/1;
+        height: 14vh;
         object-fit: cover;
         margin-top: 1%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .blog-result.even img{
+        margin-left: 0;
         margin-right: 0;
     }
     .blog-result .content .description{

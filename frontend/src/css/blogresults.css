@@ -1,6 +1,7 @@
 #blogSearchTitle{
     text-align: center;
-    font-family: "Kelly Slab", serif;
+    font-family: "Lustria", sans-serif;
+    font-weight: bold;
     font-size: 2.5vw;
 }
 
@@ -187,6 +188,7 @@ div:has(#blogResultSection){
 @media only screen and (max-width: 650px) {
     #blogSearchTitle{
         font-size: 4vh;
+        margin-top: 2vh;
     }
     #blogResultNav{
         height: 3vh;
@@ -261,6 +263,7 @@ div:has(#blogResultSection){
     }
     .blog-result-page img{
         width: 30%;
+        height: 12vh;
         aspect-ratio: 1/1;
         object-fit: cover;
         margin-top: 1%;
