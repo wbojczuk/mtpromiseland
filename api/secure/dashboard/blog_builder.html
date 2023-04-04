@@ -187,13 +187,15 @@
        
        </ul>
 </nav>
-
-    <input type="text" name="blogTitle" id="blogTitle" placeholder="Blog Title"><br>
+    <label for="blogTitle" style="height: 100%;">Title</label>
+    <input type="text" name="blogTitle" id="blogTitle" placeholder="Blog Title"><br><br>
+    <label for="blogDescription">Description</label><br>
    <textarea placeholder="Blog Description" name="blogDescription" id="blogDescription" cols="30" rows="10"></textarea><br>
 <div id="blogImgContainer">
     <label for="blogImg">Thumbnail</label><br><input type="file" name="blogImg" id="blogImg" accept="image/*"><br>
     <img id="blogImgPreview" src="https://i.imgur.com/l07w2wq.png">
 </div>
+    <label for="addtag">Tags</label>
     <input type="text" placeholder="Add Tag" id="addTag"><button id="addTagButton">Add Tag</button>
     <div id="tagsContainer">
 
@@ -221,7 +223,7 @@
 
             let tagHTML = "";
             categories.forEach((category, counter)=>{
-                tagHTML += `<input type="checkbox" name="tag${counter}" id="tag${counter}"><label for="tag${counter}">${category}</label>`;
+                tagHTML += `<div><input type="checkbox" name="tag${counter}" id="tag${counter}"><label for="tag${counter}">${category}</label></div>`;
             })
             document.getElementById("tagsContainer").innerHTML = tagHTML;
         }
@@ -233,8 +235,8 @@
             menubar: true,
             toolbar: true
             },
-            plugins: 'image',
-            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent| image',
+            plugins: 'image lists',
+            toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist | outdent indent| image',
             image_title: true,
             /* enable automatic uploads of images represented by blob or data URIs*/
             automatic_uploads: true,
@@ -292,7 +294,7 @@
 
             // Get Selected Tags
             const selectedTags = [];
-            document.querySelectorAll("#tagsContainer input").forEach((checkbox)=>{
+            document.querySelectorAll("#tagsContainer div input").forEach((checkbox)=>{
                 if(checkbox.checked){
                     selectedTags.push(document.querySelector(`label[for="${checkbox.id}"]`).textContent.toLowerCase())
                 }
@@ -368,7 +370,7 @@
             
             const curID = document.querySelectorAll("#tagsContainer input").length;
             document.getElementById("tagsContainer").insertAdjacentHTML("beforeend", `
-            <input checked type="checkbox" name="tag${curID}" id="tag${curID}"><label for="tag${curID}">${addTag.value.trim().toLowerCase()}</label>
+            <div><input checked type="checkbox" name="tag${curID}" id="tag${curID}"><label for="tag${curID}">${addTag.value.trim().toLowerCase()}</label></div>
             `);
             addTag.value = "";
             

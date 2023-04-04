@@ -1,8 +1,11 @@
 import React from "react";
+import LoadingAnim from "../components/LoadingAnim";
 import "../css/blogviewer.css";
 
 export default function BlogViewer(props){
     React.useEffect(()=>{
+        const blogViewerWrapper = document.getElementById("blogViewerWrapper");
+        
         props.setCheckLinks(["close"]);
         window.scrollTo(0,0);
 
@@ -16,6 +19,8 @@ export default function BlogViewer(props){
             const fetchBlogContent = await fetch(`${NODESERVER}/api/blogcontent/${GETVals.id}`);
             const blogContent = await fetchBlogContent.text();
 
+            
+
             // Create Date String
             const monthNames = ["January", "February", "March", "April", "May", "June",
                                 "July", "August", "September", "October", "November", "December"
@@ -28,12 +33,14 @@ export default function BlogViewer(props){
             document.getElementById("blogViewerContent").innerHTML = blogContent;
             document.getElementById("twitterShareLink").href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(blogData.description)}&url=${encodeURIComponent(window.location.href)}`;
             document.getElementById("linkedinShareLink").href = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(blogData.title)}&source=www.mtpromiselandfarm.com&summary=${encodeURIComponent(blogData.description)}`;
+            blogViewerWrapper.style.display = "block";
+            document.getElementById("loadingAnim").style.display =  "none";
         }
     },[])
     return(
         <>
-            <div id="pageID" data-id="blogviewer"></div>
-            
+            <div id="pageID" data-id="blog"></div>
+            <LoadingAnim />
             <div id="blogViewerWrapper">      
                 <div id="blogViewerContainer">
                     <div id="blogViewerShareContainer">
@@ -49,9 +56,9 @@ export default function BlogViewer(props){
                     </div>
 
                    
-                    <div id="blogViewerTitle">...loading</div>
-                    <div id="blogViewerDate">...loading</div>
-                    <div id="blogViewerContent">...loading</div>
+                    <div id="blogViewerTitle" className="display-when-loaded"></div>
+                    <div id="blogViewerDate"></div>
+                    <div id="blogViewerContent"></div>
                 </div>
             </div>
         </>

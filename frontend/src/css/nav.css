@@ -64,7 +64,24 @@
     left:0;
     bottom: -0.5vw;
 }
-
+/* Tablet Styles */
+@media only screen and (min-width: 651px) and (max-width: 959px){
+    #mainNav{
+        height: 6vw;
+        padding: 1vw 0;
+    }
+    
+    #mainNavLogo{
+        width: auto;
+        position: absolute;
+        right: 0%;
+        font-size: 5vw;
+    }
+    
+    #mainNav ul li a{
+        font-size: 2.5vw;
+    }
+}
 /* Mobile Styles */
 @media only screen and (max-width: 650px) {
     .mobile{

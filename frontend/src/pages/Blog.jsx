@@ -103,7 +103,8 @@ export default function Blog(props){
                         setBlogResults(currentBlogs);
                     }
                 }
-            
+
+            document.getElementById("allContent").style.opacity = "1";
         }
 
         // GET categories from url
@@ -123,7 +124,7 @@ export default function Blog(props){
 
         <div id="pageID" data-id="blog"></div>
         <LoadingAnim />
-        <div>
+        <div id="allContent" style={{opacity:0}}>
             <div id="blogSearchTitle">All Blogs</div>
             <BlogResultNav currentTag={currentTag} blogCategories={blogCategories} triggerReload={triggerReload}/>
             <div id="blogResultSection">
