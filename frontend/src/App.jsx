@@ -5,6 +5,7 @@ import Blog from "./pages/Blog";
 import BlogViewer from "./pages/BlogViewer";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
+import "./js/newsletter.js";
 
 export default function App(){
     // TRIGGER NAV LINKS
@@ -21,6 +22,7 @@ export default function App(){
             </Routes>
        </BrowserRouter>
        <Footer />
+       <div id="newsLetterWrapper"></div>
        </>
     )
 }

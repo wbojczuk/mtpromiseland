@@ -11,6 +11,32 @@
     --recent-blog-title-left: 50%;
 }
 
+#newsLetterWrapper{
+    z-index: 999;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+}
+#newsLetterExit{
+    display: inline-block;
+    width: 8%;
+    aspect-ratio: 1/1;
+    position: absolute;
+    top:2%;
+    right:2%;
+    background-image: url("/img/exit.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
 .center{
     display: flex;
     align-items: center;
@@ -289,6 +315,15 @@ footer .credits{
     background-image: url('/img/instagram_icon.svg');
 }
 @media only screen and (max-width: 650px) {
+    #newsLetterWrapper{
+        width: 80%;
+        padding: 0 10%;
+        height: 100%;
+        display: none;
+        background-color: rgba(0,0,0,0.5);
+        align-items: center;
+        justify-content: center;
+    }
     body{
         padding-top: 4vh;
     }
